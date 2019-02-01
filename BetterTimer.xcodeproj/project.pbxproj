@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA498B3122047BBF001391C1 /* BTGlobalTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA498B3022047BBF001391C1 /* BTGlobalTimer.swift */; };
+		FA498B332204800F001391C1 /* MainArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA498B322204800F001391C1 /* MainArcView.swift */; };
 		FAA414A922033B1A00AB0707 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA414A822033B1A00AB0707 /* AppDelegate.swift */; };
 		FAA414AB22033B1A00AB0707 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA414AA22033B1A00AB0707 /* ViewController.swift */; };
 		FAA414AE22033B1A00AB0707 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAA414AC22033B1A00AB0707 /* Main.storyboard */; };
@@ -34,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FA498B3022047BBF001391C1 /* BTGlobalTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTGlobalTimer.swift; sourceTree = "<group>"; };
+		FA498B322204800F001391C1 /* MainArcView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainArcView.swift; sourceTree = "<group>"; };
 		FAA414A522033B1A00AB0707 /* BetterTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BetterTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAA414A822033B1A00AB0707 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAA414AA22033B1A00AB0707 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +107,8 @@
 				FAA414AF22033B1B00AB0707 /* Assets.xcassets */,
 				FAA414B122033B1B00AB0707 /* LaunchScreen.storyboard */,
 				FAA414B422033B1B00AB0707 /* Info.plist */,
+				FA498B3022047BBF001391C1 /* BTGlobalTimer.swift */,
+				FA498B322204800F001391C1 /* MainArcView.swift */,
 			);
 			path = BetterTimer;
 			sourceTree = "<group>";
@@ -257,6 +263,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAA414AB22033B1A00AB0707 /* ViewController.swift in Sources */,
+				FA498B3122047BBF001391C1 /* BTGlobalTimer.swift in Sources */,
+				FA498B332204800F001391C1 /* MainArcView.swift in Sources */,
 				FAA414A922033B1A00AB0707 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

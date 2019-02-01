@@ -15,6 +15,11 @@ class ViewController: UIViewController {
     // Do any additional setup after loading the view, typically from a nib.
   }
 
+  override func viewDidAppear(_ animated: Bool) {
+    BTGlobalTimer.sharedInstance.startTimer()
 
+    let arcView = MainArcView.init(frame: CGRect(x: 10, y: 100, width: 100, height: 100))
+    view.addSubview(arcView)
+  }
 }
 
