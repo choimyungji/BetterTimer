@@ -16,6 +16,7 @@
 		FAA414B322033B1B00AB0707 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAA414B122033B1B00AB0707 /* LaunchScreen.storyboard */; };
 		FAA414BE22033B1B00AB0707 /* BetterTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA414BD22033B1B00AB0707 /* BetterTimerTests.swift */; };
 		FAA414C922033B1B00AB0707 /* BetterTimerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA414C822033B1B00AB0707 /* BetterTimerUITests.swift */; };
+		FACD62D42205BEDC00E4681C /* BTPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD62D32205BEDC00E4681C /* BTPreference.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		FAA414C422033B1B00AB0707 /* BetterTimerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BetterTimerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAA414C822033B1B00AB0707 /* BetterTimerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetterTimerUITests.swift; sourceTree = "<group>"; };
 		FAA414CA22033B1B00AB0707 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FACD62D32205BEDC00E4681C /* BTPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTPreference.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				FAA414B422033B1B00AB0707 /* Info.plist */,
 				FA498B3022047BBF001391C1 /* BTGlobalTimer.swift */,
 				FA498B322204800F001391C1 /* MainArcView.swift */,
+				FACD62D32205BEDC00E4681C /* BTPreference.swift */,
 			);
 			path = BetterTimer;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 			files = (
 				FAA414AB22033B1A00AB0707 /* ViewController.swift in Sources */,
 				FA498B3122047BBF001391C1 /* BTGlobalTimer.swift in Sources */,
+				FACD62D42205BEDC00E4681C /* BTPreference.swift in Sources */,
 				FA498B332204800F001391C1 /* MainArcView.swift in Sources */,
 				FAA414A922033B1A00AB0707 /* AppDelegate.swift in Sources */,
 			);
