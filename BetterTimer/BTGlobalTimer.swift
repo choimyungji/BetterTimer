@@ -20,11 +20,12 @@ class BTGlobalTimer: NSObject {
     super.init()
   }
 
-  func startTimer() {
+  func startTimer(target: Any, selector: Selector) {
     if internalTimer == nil {
       internalTimer?.invalidate()
     }
-    self.internalTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(fireTimerAction), userInfo: nil, repeats: true)
+    self.internalTimer = Timer.scheduledTimer(timeInterval: 1, target: target, selector: selector, userInfo: nil, repeats: true)
+//    Timer.init(fireAt: <#T##Date#>, interval: <#T##TimeInterval#>, target: <#T##Any#>, selector: <#T##Selector#>, userInfo: <#T##Any?#>, repeats: <#T##Bool#>)
   }
 
   func stopTimer() {
