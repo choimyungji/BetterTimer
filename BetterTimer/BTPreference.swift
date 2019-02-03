@@ -10,8 +10,14 @@ import UIKit
 
 class BTPreference: NSObject {
   let userDefinedTimeKey = "userDefinedTime"
-  
-  var userPhotoURL: Int {
+
+  static let getInstance = BTPreference()
+
+  private override init() {
+    super.init()
+  }
+
+  var userDefinedTime: Int {
     set (newVal) {
       UserDefaults().set(newVal, forKey: userDefinedTimeKey)
     }
