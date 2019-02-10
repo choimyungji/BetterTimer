@@ -28,7 +28,9 @@ class ViewController: UIViewController {
     let line = UIScreen.main.bounds.width - (defaultMargin * 2)
     let yPostion = (UIScreen.main.bounds.height - line) / 2
 
-    arcView = MainArcView.init(frame: CGRect(x: defaultMargin, y: yPostion, width: line, height: line))
+    print(line, yPostion)
+    arcView = MainArcView(frame: CGRect(x: defaultMargin, y: yPostion, width: line, height: line))
+//    arcView = MainArcView.init(frame: CGRect(x: defaultMargin, y: yPostion, width: line, height: line))
     view.addSubview(arcView!)
   }
 
