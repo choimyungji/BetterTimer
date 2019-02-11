@@ -28,15 +28,15 @@ class ViewController: UIViewController {
     let line = UIScreen.main.bounds.width - (defaultMargin * 2)
     let yPostion = (UIScreen.main.bounds.height - line) / 2
 
-    print(line, yPostion)
     arcView = MainArcView(frame: CGRect(x: defaultMargin, y: yPostion, width: line, height: line))
-//    arcView = MainArcView.init(frame: CGRect(x: defaultMargin, y: yPostion, width: line, height: line))
     view.addSubview(arcView!)
   }
 
   @objc func fTimerAction(sender: Any?) {
     currentTime += 1
-    print(currentTime)
+    if currentTime > BTPreference.getInstance.userDefinedTime {
+      BTGlobalTimer.sharedInstance.stopTimer()
+    }
     let degree = CGFloat(currentTime) / CGFloat(userDefinedTime) * 360
     arcView?.setCircularSector(degree: degree)
   }

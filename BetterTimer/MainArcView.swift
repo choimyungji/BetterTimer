@@ -15,12 +15,14 @@ class MainArcView: UIView {
 
   lazy private var arcLayer: CAShapeLayer = {
     let layer = CAShapeLayer()
-//    let center = CGPoint(x: bounds.midX, y: bounds.midY)
     let path = UIBezierPath(arcCenter: boundsCenter!, radius: 120, startAngle: angleToDegree(angle: 0), endAngle: angleToDegree(angle: 0), clockwise: true)
-    layer.backgroundColor = UIColor.white.cgColor
+    path.move(to: boundsCenter!)
+    path.close()
+
     layer.path = path.cgPath
-    layer.lineWidth = 120
+    layer.lineWidth = 1
     layer.strokeColor = UIColor.red.cgColor
+    layer.fillColor = UIColor.red.cgColor
 
     return layer
   }()
@@ -34,7 +36,7 @@ class MainArcView: UIView {
 
     return layer
   }()
-  
+
   override func draw(_ rect: CGRect) {
     self.backgroundColor = .white
     boundsCenter = CGPoint(x: bounds.midX, y: bounds.midY)
@@ -44,8 +46,20 @@ class MainArcView: UIView {
   }
 
   func setCircularSector(degree: CGFloat) {
-    let path = UIBezierPath(arcCenter: boundsCenter!, radius: 120, startAngle: angleToDegree(angle: 0), endAngle: angleToDegree(angle: degree), clockwise: true)
-    arcLayer.path = path.cgPath
+    let path = CGMutablePath()
+
+    path.move(to: boundsCenter!)
+    path.addArc(center: boundsCenter!, radius: 120, startAngle: angleToDegree(angle: degree), endAngle: angleToDegree(angle: 0), clockwise: true)
+    path.closeSubpath()
+
+    let animation = CABasicAnimation(keyPath: "path")
+    animation.fromValue = arcLayer.path
+    animation.toValue = path
+    animation.duration = 0.3
+    animation.timingFunction = CAMediaTimingFunction(name: .easeOut)
+
+    arcLayer.add(animation, forKey: "animationKey")
+    arcLayer.path = path
   }
 
   func angleToDegree(angle: CGFloat) -> CGFloat {
