@@ -15,7 +15,11 @@ class MainArcView: UIView {
 
   lazy private var arcLayer: CAShapeLayer = {
     let layer = CAShapeLayer()
-    let path = UIBezierPath(arcCenter: boundsCenter!, radius: 120, startAngle: angleToDegree(angle: 0), endAngle: angleToDegree(angle: 0), clockwise: true)
+    let path = UIBezierPath(arcCenter: boundsCenter!,
+                            radius: 120,
+                            startAngle: angleToDegree(angle: 0),
+                            endAngle: angleToDegree(angle: 0),
+                            clockwise: true)
     path.move(to: boundsCenter!)
     path.close()
 
@@ -29,7 +33,10 @@ class MainArcView: UIView {
 
   lazy private var centerCircle: CAShapeLayer = {
     let layer = CAShapeLayer()
-    let path = UIBezierPath(roundedRect: CGRect(x: boundsCenter!.x - 40, y: boundsCenter!.x - 40, width: 80, height: 80), cornerRadius: 40)
+    let path = UIBezierPath(roundedRect: CGRect(x: boundsCenter!.x - 40,
+                                                y: boundsCenter!.x - 40,
+                                                width: 80,
+                                                height: 80), cornerRadius: 40)
     layer.backgroundColor = UIColor.white.cgColor
     layer.path = path.cgPath
     layer.fillColor = UIColor.white.cgColor
@@ -49,7 +56,11 @@ class MainArcView: UIView {
     let path = CGMutablePath()
 
     path.move(to: boundsCenter!)
-    path.addArc(center: boundsCenter!, radius: 120, startAngle: angleToDegree(angle: degree), endAngle: angleToDegree(angle: 0), clockwise: true)
+    path.addArc(center: boundsCenter!,
+                radius: 120,
+                startAngle: angleToDegree(angle: degree),
+                endAngle: angleToDegree(angle: 0),
+                clockwise: true)
     path.closeSubpath()
 
     let animation = CABasicAnimation(keyPath: "path")
@@ -64,8 +75,8 @@ class MainArcView: UIView {
 
   func angleToDegree(angle: CGFloat) -> CGFloat {
     let rad = CGFloat.pi * 2
-    let a = ((angle / 360) - 0.25) * rad
+    let degree = ((angle / 360) - 0.25) * rad
 
-    return a
+    return degree
   }
 }

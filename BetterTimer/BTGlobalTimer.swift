@@ -24,8 +24,11 @@ class BTGlobalTimer: NSObject {
     if internalTimer == nil {
       internalTimer?.invalidate()
     }
-    self.internalTimer = Timer.scheduledTimer(timeInterval: 1, target: target, selector: selector, userInfo: nil, repeats: true)
-//    Timer.init(fireAt: <#T##Date#>, interval: <#T##TimeInterval#>, target: <#T##Any#>, selector: <#T##Selector#>, userInfo: <#T##Any?#>, repeats: <#T##Bool#>)
+    internalTimer = Timer.scheduledTimer(timeInterval: 1,
+                                         target: target,
+                                         selector: selector,
+                                         userInfo: nil,
+                                         repeats: true)
   }
 
   func stopTimer() {
@@ -37,7 +40,5 @@ class BTGlobalTimer: NSObject {
 
   @objc func fireTimerAction(sender: Any?) {
     print("timer")
-//    getMyNewsList()
   }
 }
-

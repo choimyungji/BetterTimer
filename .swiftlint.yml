@@ -1,0 +1,12 @@
+disabled_rules:
+  - notification_center_detachment
+  - force_cast
+
+excluded:
+  - Pods 
+
+identifier_name:
+  min_length: 
+    error: 3 
+  excluded: 
+    - to

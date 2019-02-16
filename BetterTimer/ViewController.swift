@@ -50,4 +50,3 @@ class ViewController: UIViewController {
     timerLabel.text = String(BTPreference.getInstance.userDefinedTime - currentTime)
   }
 }
-
