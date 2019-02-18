@@ -29,6 +29,9 @@ class ViewController: UIViewController {
   }
 
   override func viewDidAppear(_ animated: Bool) {
+    UIView.animate(withDuration: 2.2) {
+      self.timerLabel.alpha = 0
+    }
     userDefinedTime = BTPreference.getInstance.userDefinedTime
     currentTime = 0
     BTGlobalTimer.sharedInstance.startTimer(target: self, selector: #selector(self.fTimerAction))
