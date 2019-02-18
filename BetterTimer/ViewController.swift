@@ -17,13 +17,17 @@ class ViewController: UIViewController {
   private lazy var timerLabel: UILabel = {
     let label = UILabel()
     label.textColor = .red
+    label.font = UIFont.systemFont(ofSize: 40, weight: .ultraLight)
+    label.textAlignment = .center
     return label
   }()
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    timerLabel.frame = CGRect(x: 20, y: 50, width: 200, height: 50)
+    let line = UIScreen.main.bounds.width - (defaultMargin * 2)
+    let yPosition = UIScreen.main.bounds.height - 220
+    timerLabel.frame = CGRect(x: defaultMargin, y: yPosition, width: line, height: 30)
     view.addSubview(timerLabel)
     timerLabel.text = String(BTPreference.getInstance.userDefinedTime)
   }
