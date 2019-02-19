@@ -29,11 +29,11 @@ class ViewController: UIViewController {
     let yPosition = UIScreen.main.bounds.height - 220
     timerLabel.frame = CGRect(x: defaultMargin, y: yPosition, width: line, height: 30)
     view.addSubview(timerLabel)
-    timerLabel.text = String(BTPreference.getInstance.userDefinedTime)
+    timerLabel.text = convertTimeInteger(with: BTPreference.getInstance.userDefinedTime)
   }
 
   override func viewDidAppear(_ animated: Bool) {
-    UIView.animate(withDuration: 2.2) {
+    UIView.animate(withDuration: 4) {
       self.timerLabel.alpha = 0
     }
     userDefinedTime = BTPreference.getInstance.userDefinedTime
@@ -54,6 +54,11 @@ class ViewController: UIViewController {
     }
     let degree = CGFloat(currentTime) / CGFloat(userDefinedTime) * 360
     arcView?.setCircularSector(degree: degree)
-    timerLabel.text = String(BTPreference.getInstance.userDefinedTime - currentTime)
+    timerLabel.text = convertTimeInteger(with: BTPreference.getInstance.userDefinedTime - currentTime)
+  }
+
+  func convertTimeInteger(with: Int) -> String {
+    let retValue = String(format: "%d:%02d", Int(with / 60), with % 60)
+    return retValue
   }
 }
