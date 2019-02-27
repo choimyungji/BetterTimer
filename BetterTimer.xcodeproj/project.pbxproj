@@ -16,7 +16,6 @@
 		FAA414AB22033B1A00AB0707 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA414AA22033B1A00AB0707 /* ViewController.swift */; };
 		FAA414AE22033B1A00AB0707 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAA414AC22033B1A00AB0707 /* Main.storyboard */; };
 		FAA414B022033B1B00AB0707 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAA414AF22033B1B00AB0707 /* Assets.xcassets */; };
-		FAA414B322033B1B00AB0707 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAA414B122033B1B00AB0707 /* LaunchScreen.storyboard */; };
 		FAA414BE22033B1B00AB0707 /* BetterTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA414BD22033B1B00AB0707 /* BetterTimerTests.swift */; };
 		FAA414C922033B1B00AB0707 /* BetterTimerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA414C822033B1B00AB0707 /* BetterTimerUITests.swift */; };
 		FACD62D42205BEDC00E4681C /* BTPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD62D32205BEDC00E4681C /* BTPreference.swift */; };
@@ -56,7 +55,6 @@
 		FAA414AA22033B1A00AB0707 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		FAA414AD22033B1A00AB0707 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FAA414AF22033B1B00AB0707 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FAA414B222033B1B00AB0707 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FAA414B422033B1B00AB0707 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAA414B922033B1B00AB0707 /* BetterTimerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BetterTimerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAA414BD22033B1B00AB0707 /* BetterTimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetterTimerTests.swift; sourceTree = "<group>"; };
@@ -147,7 +145,6 @@
 				FAA414AA22033B1A00AB0707 /* ViewController.swift */,
 				FAA414AC22033B1A00AB0707 /* Main.storyboard */,
 				FAA414AF22033B1B00AB0707 /* Assets.xcassets */,
-				FAA414B122033B1B00AB0707 /* LaunchScreen.storyboard */,
 				FAA414B422033B1B00AB0707 /* Info.plist */,
 				FA498B3022047BBF001391C1 /* BTGlobalTimer.swift */,
 				FA498B322204800F001391C1 /* MainArcView.swift */,
@@ -283,7 +280,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAA414B322033B1B00AB0707 /* LaunchScreen.storyboard in Resources */,
 				FAA414B022033B1B00AB0707 /* Assets.xcassets in Resources */,
 				FAA414AE22033B1A00AB0707 /* Main.storyboard in Resources */,
 			);
@@ -466,14 +462,6 @@
 				FAA414AD22033B1A00AB0707 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		FAA414B122033B1B00AB0707 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FAA414B222033B1B00AB0707 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
