@@ -58,7 +58,7 @@ class MainArcView: UIView {
     path.move(to: boundsCenter!)
     path.addArc(center: boundsCenter!,
                 radius: 120,
-                startAngle: angleToDegree(angle: degree),
+                startAngle: angleToDegree(angle: 360-degree),
                 endAngle: angleToDegree(angle: 0),
                 clockwise: true)
     path.closeSubpath()
