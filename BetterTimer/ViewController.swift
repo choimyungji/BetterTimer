@@ -60,8 +60,10 @@ class ViewController: UIViewController {
     currentTime += 1
     if currentTime > BTPreference.getInstance.userDefinedTime {
       BTGlobalTimer.sharedInstance.stopTimer()
+      timerLabel.text = "Time out"
+      timerLabel.alpha = 1
 
-
+      return
     }
     let degree = CGFloat(currentTime) / CGFloat(userDefinedTime) * 360
     arcView?.setCircularSector(degree: degree)
