@@ -13,6 +13,14 @@ class ViewController: UIViewController {
   var currentTime: Int = 0
   let defaultMargin: CGFloat = 24
 
+  var statusBarHidden = false {
+    didSet {
+      UIView.animate(withDuration: 2) {
+        self.setNeedsStatusBarAppearanceUpdate()
+      }
+    }
+  }
+
   var arcView: MainArcView?
   private lazy var timerLabel: UILabel = {
     let label = UILabel()
@@ -45,12 +53,15 @@ class ViewController: UIViewController {
 
     arcView = MainArcView(frame: CGRect(x: defaultMargin, y: yPostion, width: line, height: line))
     view.addSubview(arcView!)
+    statusBarHidden = true
   }
 
   @objc func fTimerAction(sender: Any?) {
     currentTime += 1
     if currentTime > BTPreference.getInstance.userDefinedTime {
       BTGlobalTimer.sharedInstance.stopTimer()
+
+
     }
     let degree = CGFloat(currentTime) / CGFloat(userDefinedTime) * 360
     arcView?.setCircularSector(degree: degree)
@@ -60,5 +71,19 @@ class ViewController: UIViewController {
   func convertTimeInteger(with: Int) -> String {
     let retValue = String(format: "%d:%02d", Int(with / 60), with % 60)
     return retValue
+  }
+}
+
+extension ViewController {
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .default
+  }
+
+  override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+    return .fade
+  }
+
+  override var prefersStatusBarHidden: Bool {
+    return statusBarHidden
   }
 }
