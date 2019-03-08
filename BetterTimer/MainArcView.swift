@@ -10,13 +10,13 @@ import UIKit
 
 class MainArcView: UIView {
   var context: CGContext?
-  var rect: CGRect?
+//  var rect: CGRect?
   var boundsCenter: CGPoint?
 
   lazy private var arcLayer: CAShapeLayer = {
     let layer = CAShapeLayer()
     let path = UIBezierPath(arcCenter: boundsCenter!,
-                            radius: 120,
+                            radius: bounds.size.width / 2,
                             startAngle: angleToDegree(angle: 0),
                             endAngle: angleToDegree(angle: 0),
                             clockwise: true)
@@ -33,10 +33,10 @@ class MainArcView: UIView {
 
   lazy private var centerOuterCircle: CAShapeLayer = {
     let layer = CAShapeLayer()
-    let path = UIBezierPath(roundedRect: CGRect(x: boundsCenter!.x - 120,
-                                                y: boundsCenter!.x - 120,
-                                                width: 240,
-                                                height: 240), cornerRadius: 120)
+    let path = UIBezierPath(roundedRect: CGRect(x: bounds.origin.x,
+                                                y: bounds.origin.y,
+                                                width: bounds.size.width,
+                                                height: bounds.size.width), cornerRadius: bounds.size.width / 2)
 
     layer.backgroundColor = UIColor.red.cgColor
     layer.path = path.cgPath
@@ -47,10 +47,10 @@ class MainArcView: UIView {
 
   lazy private var centerInnerCircle: CAShapeLayer = {
     let layer = CAShapeLayer()
-    let path = UIBezierPath(roundedRect: CGRect(x: boundsCenter!.x - 40,
-                                                y: boundsCenter!.x - 40,
-                                                width: 80,
-                                                height: 80), cornerRadius: 40)
+    let path = UIBezierPath(roundedRect: CGRect(x: boundsCenter!.x - 80,
+                                                y: boundsCenter!.x - 80,
+                                                width: 160,
+                                                height: 160), cornerRadius: 80)
 
     layer.backgroundColor = UIColor.white.cgColor
     layer.path = path.cgPath
@@ -62,6 +62,7 @@ class MainArcView: UIView {
   override func draw(_ rect: CGRect) {
     self.backgroundColor = .white
     boundsCenter = CGPoint(x: bounds.midX, y: bounds.midY)
+    print(boundsCenter)
 
     layer.addSublayer(centerOuterCircle)
     layer.addSublayer(centerInnerCircle)
@@ -77,7 +78,7 @@ class MainArcView: UIView {
 
     path.move(to: boundsCenter!)
     path.addArc(center: boundsCenter!,
-                radius: 120,
+                radius: bounds.size.width / 2,
                 startAngle: angleToDegree(angle: 0),
                 endAngle: angleToDegree(angle: 360-circleDegree),
                 clockwise: true)
