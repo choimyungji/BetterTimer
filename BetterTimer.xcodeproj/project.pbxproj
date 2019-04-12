@@ -247,13 +247,16 @@
 				TargetAttributes = {
 					FAA414A422033B1A00AB0707 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 					FAA414B822033B1B00AB0707 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = FAA414A422033B1A00AB0707;
 					};
 					FAA414C322033B1B00AB0707 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = FAA414A422033B1A00AB0707;
 					};
 				};
@@ -601,7 +604,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.BetterTimer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -620,7 +623,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.BetterTimer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -640,7 +643,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.BetterTimerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BetterTimer.app/BetterTimer";
 			};
@@ -661,7 +664,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.BetterTimerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BetterTimer.app/BetterTimer";
 			};
@@ -681,7 +684,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.BetterTimerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = BetterTimer;
 			};
@@ -701,7 +704,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.BetterTimerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = BetterTimer;
 			};
