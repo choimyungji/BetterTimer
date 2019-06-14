@@ -30,6 +30,18 @@ class ViewController: UIViewController {
     return label
   }()
 
+  private lazy var restartButton: UIButton = {
+    let button = UIButton()
+    button.setTitle("Refresh", for: .normal)
+    button.setTitleColor(.red, for: .normal)
+    button.addTarget(self, action: #selector(refresh), for: .touchUpInside)
+    return button
+  }()
+
+  @objc func refresh() {
+    currentTime = 0
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -38,6 +50,9 @@ class ViewController: UIViewController {
     timerLabel.frame = CGRect(x: defaultMargin, y: yPosition, width: line, height: 30)
     view.addSubview(timerLabel)
     timerLabel.text = convertTimeInteger(with: BTPreference.getInstance.userDefinedTime)
+
+    restartButton.frame = CGRect(x: defaultMargin, y: yPosition + 40, width: line, height: 30)
+    view.addSubview(restartButton)
   }
 
   override func viewDidAppear(_ animated: Bool) {
