@@ -22,7 +22,7 @@ class BTPreference: NSObject {
       UserDefaults().set(newVal, forKey: userDefinedTimeKey)
     }
     get {
-      return UserDefaults().object(forKey: userDefinedTimeKey) as? Int ?? 120
+      return UserDefaults().object(forKey: userDefinedTimeKey) as? Int ?? 25 * 60
     }
   }
 }
