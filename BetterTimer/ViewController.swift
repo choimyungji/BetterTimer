@@ -12,6 +12,7 @@ class ViewController: UIViewController {
   var userDefinedTime: Int = 0
   var currentTime: Int = 0
   let defaultMargin: CGFloat = 24
+  var isShownViewComponent: Bool = true
 
   var statusBarHidden = false {
     didSet {
@@ -38,6 +39,14 @@ class ViewController: UIViewController {
     return button
   }()
 
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    UIView.animate(withDuration: 1) {
+      self.timerLabel.alpha = self.isShownViewComponent ? 1 : 0
+      self.restartButton.alpha = self.isShownViewComponent ? 1 : 0
+    }
+    isShownViewComponent.toggle()
+  }
+
   @objc func refresh() {
     currentTime = 0
   }
@@ -58,6 +67,7 @@ class ViewController: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     UIView.animate(withDuration: 4) {
       self.timerLabel.alpha = 0
+      self.restartButton.alpha = 0
     }
     userDefinedTime = BTPreference.getInstance.userDefinedTime
     currentTime = 0
