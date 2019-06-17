@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class ViewController: UIViewController {
   var userDefinedTime: Int = 0
@@ -72,6 +73,7 @@ class ViewController: UIViewController {
     userDefinedTime = BTPreference.getInstance.userDefinedTime
     currentTime = 0
     BTGlobalTimer.sharedInstance.startTimer(target: self, selector: #selector(self.fTimerAction))
+    registerNotification()
 
     let line = UIScreen.main.bounds.width - (defaultMargin * 2)
     let yPostion = (UIScreen.main.bounds.height - line) / 2
@@ -84,10 +86,7 @@ class ViewController: UIViewController {
   @objc func fTimerAction(sender: Any?) {
     currentTime += 1
     if currentTime > BTPreference.getInstance.userDefinedTime {
-      BTGlobalTimer.sharedInstance.stopTimer()
-      timerLabel.text = "Time out"
-      timerLabel.alpha = 1
-
+      completeTimer()
       return
     }
     let degree = CGFloat(currentTime) / CGFloat(userDefinedTime) * 360
@@ -98,6 +97,46 @@ class ViewController: UIViewController {
   func convertTimeInteger(with: Int) -> String {
     let retValue = String(format: "%d:%02d", Int(with / 60), with % 60)
     return retValue
+  }
+
+  func registerNotification() {
+    let options: UNAuthorizationOptions = [.alert, .sound]
+    let center = UNUserNotificationCenter.current()
+    center.requestAuthorization(options: options) { (granted, error) in
+      guard granted else { return }
+
+      let calendar = Calendar.current
+      let date = calendar.date(byAdding: .second,
+                                     value: BTPreference.getInstance.userDefinedTime,
+                                     to: Date())
+
+      let components = calendar.dateComponents([.hour, .minute, .second], from: date!)
+
+      let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+      let request = UNNotificationRequest(identifier: "timer",
+                                          content: self.makeNotificationContent(),
+                                          trigger: trigger)
+
+      center.add(request) { _ in
+        center.getPendingNotificationRequests(completionHandler: { _ in
+          print("completed")
+        })
+      }
+    }
+  }
+
+  private func makeNotificationContent() -> UNMutableNotificationContent {
+    let content = UNMutableNotificationContent()
+    content.categoryIdentifier = "timer"
+    content.body = "Time Out"
+
+    return content
+  }
+
+  func completeTimer() {
+    BTGlobalTimer.sharedInstance.stopTimer()
+    timerLabel.text = "Time out"
+    timerLabel.alpha = 1
   }
 }
 
