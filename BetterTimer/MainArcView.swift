@@ -7,14 +7,14 @@
 //
 
 import UIKit
+import Then
 
 class MainArcView: UIView {
   var context: CGContext?
 //  var rect: CGRect?
   var boundsCenter: CGPoint?
 
-  lazy private var arcLayer: CAShapeLayer = {
-    let layer = CAShapeLayer()
+  lazy private var arcLayer = CAShapeLayer().then {
     let path = UIBezierPath(arcCenter: boundsCenter!,
                             radius: bounds.size.width / 2,
                             startAngle: angleToDegree(angle: 0),
@@ -23,41 +23,34 @@ class MainArcView: UIView {
     path.move(to: boundsCenter!)
     path.close()
 
-    layer.path = path.cgPath
-    layer.lineWidth = 1
-    layer.strokeColor = UIColor.white.cgColor
-    layer.fillColor = UIColor.white.cgColor
+    $0.path = path.cgPath
+    $0.lineWidth = 1
+    $0.strokeColor = UIColor.white.cgColor
+    $0.fillColor = UIColor.white.cgColor
+  }
 
-    return layer
-  }()
-
-  lazy private var centerOuterCircle: CAShapeLayer = {
-    let layer = CAShapeLayer()
+  lazy private var centerOuterCircle = CAShapeLayer().then {
     let path = UIBezierPath(roundedRect: CGRect(x: bounds.origin.x,
                                                 y: bounds.origin.y,
                                                 width: bounds.size.width,
                                                 height: bounds.size.width), cornerRadius: bounds.size.width / 2)
 
-    layer.backgroundColor = UIColor.red.cgColor
-    layer.path = path.cgPath
-    layer.fillColor = UIColor.red.cgColor
+    $0.backgroundColor = UIColor.red.cgColor
+    $0.path = path.cgPath
+    $0.fillColor = UIColor.red.cgColor
+  }
 
-    return layer
-  }()
+  lazy private var centerInnerCircle = CAShapeLayer().then {
 
-  lazy private var centerInnerCircle: CAShapeLayer = {
-    let layer = CAShapeLayer()
     let path = UIBezierPath(roundedRect: CGRect(x: boundsCenter!.x - 80,
                                                 y: boundsCenter!.x - 80,
                                                 width: 160,
                                                 height: 160), cornerRadius: 80)
 
-    layer.backgroundColor = UIColor.white.cgColor
-    layer.path = path.cgPath
-    layer.fillColor = UIColor.white.cgColor
-
-    return layer
-  }()
+    $0.backgroundColor = UIColor.white.cgColor
+    $0.path = path.cgPath
+    $0.fillColor = UIColor.white.cgColor
+  }
 
   override func draw(_ rect: CGRect) {
     self.backgroundColor = .white
