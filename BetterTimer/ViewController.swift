@@ -40,6 +40,14 @@ class ViewController: UIViewController {
     return button
   }()
 
+  private lazy var preferenceButton: UIButton = {
+    let button = UIButton()
+    button.setTitle("Edit", for: .normal)
+    button.setTitleColor(.red, for: .normal)
+    button.addTarget(self, action: #selector(edit), for: .touchUpInside)
+    return button
+  }()
+
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     UIView.animate(withDuration: 1) {
       self.timerLabel.alpha = self.isShownViewComponent ? 1 : 0
@@ -50,6 +58,12 @@ class ViewController: UIViewController {
 
   @objc func refresh() {
     currentTime = 0
+    BTGlobalTimer.sharedInstance.startTimer(target: self, selector: #selector(self.fTimerAction))
+  }
+
+  @objc func edit() {
+    let preferenceViewController = PreferenceViewController()
+    self.present(preferenceViewController, animated: true)
   }
 
   override func viewDidLoad() {
@@ -62,7 +76,12 @@ class ViewController: UIViewController {
     timerLabel.text = convertTimeInteger(with: BTPreference.getInstance.userDefinedTime)
 
     restartButton.frame = CGRect(x: defaultMargin, y: yPosition + 40, width: line, height: 30)
+    preferenceButton.frame = CGRect(x: defaultMargin,
+                                    y: UIScreen.main.bounds.height - 44,
+                                    width: 60,
+                                    height: 44)
     view.addSubview(restartButton)
+    view.addSubview(preferenceButton)
   }
 
   override func viewDidAppear(_ animated: Bool) {
