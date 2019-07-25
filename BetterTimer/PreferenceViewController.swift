@@ -9,23 +9,31 @@
 import UIKit
 
 class PreferenceViewController: UIViewController {
+  let defaultMargin: CGFloat = 24
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+  private var timerLabel: UILabel = {
+    let label = UILabel()
+    label.text = "시간"
+    label.textColor = .black
+    label.font = UIFont.systemFont(ofSize: 17)
+    return label
+  }()
 
-      self.view.backgroundColor = .white
-        // Do any additional setup after loading the view.
-    }
-    
+  private var timerField: UITextField = {
+    let field = UITextField()
+    return field
+  }()
 
-    /*
-    // MARK: - Navigation
+  override func viewDidLoad() {
+    super.viewDidLoad()
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    title = "설정"
+    view.backgroundColor = .white
+    view.addSubview(timerLabel)
+    timerLabel.frame = CGRect(x: defaultMargin, y: 120, width: 100, height: 22)
 
+    view.addSubview(timerField)
+    let width = UIScreen.main.bounds.width - (defaultMargin * 2)
+    timerField.frame = CGRect(x: defaultMargin, y: timerLabel.frame.maxY, width: width, height: 44)
+  }
 }

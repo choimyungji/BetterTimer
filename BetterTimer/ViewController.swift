@@ -63,7 +63,8 @@ class ViewController: UIViewController {
 
   @objc func edit() {
     let preferenceViewController = PreferenceViewController()
-    self.present(preferenceViewController, animated: true)
+    let nav = UINavigationController(rootViewController: preferenceViewController)
+    self.present(nav, animated: true)
   }
 
   override func viewDidLoad() {
