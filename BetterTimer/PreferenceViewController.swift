@@ -21,7 +21,18 @@ class PreferenceViewController: UIViewController {
 
   private var timerField: UITextField = {
     let field = UITextField()
+    field.borderStyle = UITextField.BorderStyle.line
+    field.text = String(BTPreference.getInstance.userDefinedTime)
     return field
+  }()
+
+  private var okButton: UIButton = {
+    let button = UIButton()
+    button.backgroundColor = .red
+    button.setTitle("완료", for: .normal)
+    button.setTitleColor(.white, for: .normal)
+    button.layer.cornerRadius = 4
+    return button
   }()
 
   override func viewDidLoad() {
@@ -35,5 +46,11 @@ class PreferenceViewController: UIViewController {
     view.addSubview(timerField)
     let width = UIScreen.main.bounds.width - (defaultMargin * 2)
     timerField.frame = CGRect(x: defaultMargin, y: timerLabel.frame.maxY, width: width, height: 44)
+
+    view.addSubview(okButton)
+    okButton.frame = CGRect(x: defaultMargin,
+                            y: UIScreen.main.bounds.height - 44 - defaultMargin,
+                            width: width,
+                            height: 44)
   }
 }
