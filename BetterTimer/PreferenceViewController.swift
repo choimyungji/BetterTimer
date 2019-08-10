@@ -22,7 +22,7 @@ class PreferenceViewController: UIViewController {
   private var timerField: UITextField = {
     let field = UITextField()
     field.borderStyle = UITextField.BorderStyle.line
-    field.text = String(BTPreference.getInstance.userDefinedTime)
+    field.text = String(BTPreference.getInstance.userDefinedTimeInterval)
     return field
   }()
 

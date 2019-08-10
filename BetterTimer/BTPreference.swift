@@ -9,7 +9,7 @@
 import UIKit
 
 class BTPreference: NSObject {
-  let userDefinedTimeKey = "userDefinedTime"
+  private let userDefinedTimeIntervalKey = "userDefinedTimeInterval"
 
   static let getInstance = BTPreference()
 
@@ -17,12 +17,12 @@ class BTPreference: NSObject {
     super.init()
   }
 
-  var userDefinedTime: Int {
+  var userDefinedTimeInterval: TimeInterval {
     set (newVal) {
-      UserDefaults().set(newVal, forKey: userDefinedTimeKey)
+      UserDefaults().set(newVal, forKey: userDefinedTimeIntervalKey)
     }
     get {
-      return UserDefaults().object(forKey: userDefinedTimeKey) as? Int ?? 25 * 60
+      return UserDefaults().object(forKey: userDefinedTimeIntervalKey) as? TimeInterval ?? 25.0 * 60
     }
   }
 }

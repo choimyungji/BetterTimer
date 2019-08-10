@@ -26,7 +26,7 @@ class MainArcView: UIView {
     $0.lineWidth = 80
     $0.strokeColor = UIColor.red.cgColor
     $0.fillColor = UIColor.white.cgColor
-    $0.strokeEnd = 0
+    $0.strokeEnd = 1
   }
 
   override func draw(_ rect: CGRect) {
@@ -37,11 +37,6 @@ class MainArcView: UIView {
 
   func setCircularSector(degree: CGFloat) {
     print(arcLayer.strokeEnd)
-    var circleDegree = degree
-    if circleDegree == 360.0 {
-      circleDegree = 0
-    }
-
     arcLayer.strokeEnd = 1.0 / 360 * degree
   }
 

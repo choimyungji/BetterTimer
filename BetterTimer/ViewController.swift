@@ -10,8 +10,7 @@ import UIKit
 import UserNotifications
 
 class ViewController: UIViewController {
-  var userDefinedTime: Int = 0
-  var currentTime: Int = 0
+  var userDefinedTime: Date?
   let defaultMargin: CGFloat = 24
   var isShownViewComponent: Bool = true
 
@@ -57,7 +56,6 @@ class ViewController: UIViewController {
   }
 
   @objc func refresh() {
-    currentTime = 0
     BTGlobalTimer.sharedInstance.startTimer(target: self, selector: #selector(self.fTimerAction))
   }
 
@@ -74,7 +72,7 @@ class ViewController: UIViewController {
     let yPosition = UIScreen.main.bounds.height - 220
     timerLabel.frame = CGRect(x: defaultMargin, y: yPosition, width: line, height: 30)
     view.addSubview(timerLabel)
-    timerLabel.text = convertTimeInteger(with: BTPreference.getInstance.userDefinedTime)
+    timerLabel.text = convertTimeInteger(with: BTPreference.getInstance.userDefinedTimeInterval)
 
     restartButton.frame = CGRect(x: defaultMargin, y: yPosition + 40, width: line, height: 30)
     preferenceButton.frame = CGRect(x: defaultMargin,
@@ -90,8 +88,8 @@ class ViewController: UIViewController {
       self.timerLabel.alpha = 0
       self.restartButton.alpha = 0
     }
-    userDefinedTime = BTPreference.getInstance.userDefinedTime
-    currentTime = 0
+    userDefinedTime = Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)
+
     BTGlobalTimer.sharedInstance.startTimer(target: self, selector: #selector(self.fTimerAction))
     registerNotification()
 
@@ -104,18 +102,22 @@ class ViewController: UIViewController {
   }
 
   @objc func fTimerAction(sender: Any?) {
-    currentTime += 1
-    if currentTime > BTPreference.getInstance.userDefinedTime {
+    guard let userDefinedTime = userDefinedTime else { return }
+
+    let degree = userDefinedTime.timeIntervalSince(Date()) / BTPreference.getInstance.userDefinedTimeInterval * 360
+
+    arcView?.setCircularSector(degree: CGFloat(degree))
+    timerLabel.text = convertTimeInteger(with: userDefinedTime.timeIntervalSince(Date()))
+
+    if Date() > userDefinedTime {
       completeTimer()
-      return
+//      return
     }
-    let degree = CGFloat(currentTime) / CGFloat(userDefinedTime) * 360
-    arcView?.setCircularSector(degree: degree)
-    timerLabel.text = convertTimeInteger(with: BTPreference.getInstance.userDefinedTime - currentTime)
   }
 
-  func convertTimeInteger(with: Int) -> String {
-    let retValue = String(format: "%d:%02d", Int(with / 60), with % 60)
+  func convertTimeInteger(with time: TimeInterval) -> String {
+    let intTime = Int(time)
+    let retValue = String(format: "%d:%02d", Int(intTime / 60), intTime % 60)
     return retValue
   }
 
@@ -123,14 +125,10 @@ class ViewController: UIViewController {
     let options: UNAuthorizationOptions = [.alert, .sound]
     let center = UNUserNotificationCenter.current()
     center.requestAuthorization(options: options) { (granted, error) in
-      guard granted else { return }
+      guard granted, error != nil else { return }
 
       let calendar = Calendar.current
-      let date = calendar.date(byAdding: .second,
-                                     value: BTPreference.getInstance.userDefinedTime,
-                                     to: Date())
-
-      let components = calendar.dateComponents([.hour, .minute, .second], from: date!)
+      let components = calendar.dateComponents([.hour, .minute, .second], from: self.userDefinedTime!)
 
       let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
       let request = UNNotificationRequest(identifier: "timer",
@@ -157,6 +155,7 @@ class ViewController: UIViewController {
     BTGlobalTimer.sharedInstance.stopTimer()
     timerLabel.text = "Time out"
     timerLabel.alpha = 1
+    restartButton.isHidden = false
   }
 }
 
