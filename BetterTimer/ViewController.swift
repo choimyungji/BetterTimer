@@ -58,6 +58,7 @@ class ViewController: UIViewController {
   }
 
   @objc func refresh() {
+    userDefinedTime = Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)
     BTGlobalTimer.sharedInstance.startTimer(target: self, selector: #selector(self.fTimerAction))
   }
 
