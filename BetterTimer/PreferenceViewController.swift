@@ -7,33 +7,28 @@
 //
 
 import UIKit
+import Then
 
 class PreferenceViewController: UIViewController {
   let defaultMargin: CGFloat = 24
 
-  private var timerLabel: UILabel = {
-    let label = UILabel()
-    label.text = "시간"
-    label.textColor = .black
-    label.font = UIFont.systemFont(ofSize: 17)
-    return label
-  }()
+  private var timerLabel = UILabel().then {
+    $0.text = "시간"
+    $0.textColor = .black
+    $0.font = UIFont.systemFont(ofSize: 17)
+  }
 
-  private var timerField: UITextField = {
-    let field = UITextField()
-    field.borderStyle = UITextField.BorderStyle.line
-    field.text = String(BTPreference.getInstance.userDefinedTimeInterval)
-    return field
-  }()
+  private var timerField = UITextField().then {
+    $0.borderStyle = UITextField.BorderStyle.line
+    $0.text = String(BTPreference.getInstance.userDefinedTimeInterval)
+  }
 
-  private var okButton: UIButton = {
-    let button = UIButton()
-    button.backgroundColor = .red
-    button.setTitle("완료", for: .normal)
-    button.setTitleColor(.white, for: .normal)
-    button.layer.cornerRadius = 4
-    return button
-  }()
+  private var okButton = UIButton().then {
+    $0.backgroundColor = .red
+    $0.setTitle("완료", for: .normal)
+    $0.setTitleColor(.white, for: .normal)
+    $0.layer.cornerRadius = 4
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
