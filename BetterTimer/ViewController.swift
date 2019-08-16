@@ -125,7 +125,7 @@ class ViewController: UIViewController {
     let options: UNAuthorizationOptions = [.alert, .sound]
     let center = UNUserNotificationCenter.current()
     center.requestAuthorization(options: options) { (granted, error) in
-      guard granted, error != nil else { return }
+      guard granted, error == nil else { return }
 
       let calendar = Calendar.current
       let components = calendar.dateComponents([.hour, .minute, .second], from: self.userDefinedTime!)
@@ -137,7 +137,7 @@ class ViewController: UIViewController {
 
       center.add(request) { _ in
         center.getPendingNotificationRequests(completionHandler: { _ in
-          print("completed")
+          print("notification add completed")
         })
       }
     }
