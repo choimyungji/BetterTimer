@@ -52,6 +52,7 @@ class ViewController: UIViewController {
       self.timerLabel.alpha = self.isShownViewComponent ? 1 : 0
       self.restartButton.alpha = self.isShownViewComponent ? 1 : 0
       self.preferenceButton.alpha = self.isShownViewComponent ? 1 : 0
+      self.statusBarHidden = !self.isShownViewComponent
     }
     isShownViewComponent.toggle()
   }
