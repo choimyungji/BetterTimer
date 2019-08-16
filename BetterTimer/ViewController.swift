@@ -51,6 +51,7 @@ class ViewController: UIViewController {
     UIView.animate(withDuration: 1) {
       self.timerLabel.alpha = self.isShownViewComponent ? 1 : 0
       self.restartButton.alpha = self.isShownViewComponent ? 1 : 0
+      self.preferenceButton.alpha = self.isShownViewComponent ? 1 : 0
     }
     isShownViewComponent.toggle()
   }
@@ -87,6 +88,7 @@ class ViewController: UIViewController {
     UIView.animate(withDuration: 4) {
       self.timerLabel.alpha = 0
       self.restartButton.alpha = 0
+      self.preferenceButton.alpha = 0
     }
     userDefinedTime = Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)
 
