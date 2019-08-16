@@ -7,7 +7,6 @@
 //
 
 import UIKit
-//import Alamofire
 
 class BTGlobalTimer: NSObject {
   static let sharedInstance: BTGlobalTimer = {
@@ -21,9 +20,7 @@ class BTGlobalTimer: NSObject {
   }
 
   func startTimer(target: Any, selector: Selector) {
-    if internalTimer == nil {
-      internalTimer?.invalidate()
-    }
+    internalTimer?.invalidate()
     internalTimer = Timer.scheduledTimer(timeInterval: 1,
                                          target: target,
                                          selector: selector,
