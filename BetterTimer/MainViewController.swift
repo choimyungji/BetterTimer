@@ -9,7 +9,7 @@
 import UIKit
 import UserNotifications
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
   var userDefinedTime: Date?
   let defaultMargin: CGFloat = 24
   var isShownViewComponent: Bool = true
@@ -176,7 +176,7 @@ class ViewController: UIViewController {
   }
 }
 
-extension ViewController {
+extension MainViewController {
   override var preferredStatusBarStyle: UIStatusBarStyle {
     return .default
   }

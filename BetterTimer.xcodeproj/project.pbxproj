@@ -15,7 +15,7 @@
 		FA55BF8622E8897900137D0C /* PreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA55BF8522E8897900137D0C /* PreferenceViewController.swift */; };
 		FA6245DB222979A10029152E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA6245DA222979A10029152E /* LaunchScreen.storyboard */; };
 		FAA414A922033B1A00AB0707 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA414A822033B1A00AB0707 /* AppDelegate.swift */; };
-		FAA414AB22033B1A00AB0707 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA414AA22033B1A00AB0707 /* ViewController.swift */; };
+		FAA414AB22033B1A00AB0707 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA414AA22033B1A00AB0707 /* MainViewController.swift */; };
 		FAA414AE22033B1A00AB0707 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAA414AC22033B1A00AB0707 /* Main.storyboard */; };
 		FAA414B022033B1B00AB0707 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAA414AF22033B1B00AB0707 /* Assets.xcassets */; };
 		FAA414BE22033B1B00AB0707 /* BetterTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA414BD22033B1B00AB0707 /* BetterTimerTests.swift */; };
@@ -56,7 +56,7 @@
 		FA6245DA222979A10029152E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FAA414A522033B1A00AB0707 /* BetterTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BetterTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAA414A822033B1A00AB0707 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FAA414AA22033B1A00AB0707 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FAA414AA22033B1A00AB0707 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		FAA414AD22033B1A00AB0707 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FAA414AF22033B1B00AB0707 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAA414B422033B1B00AB0707 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				FAA414A822033B1A00AB0707 /* AppDelegate.swift */,
-				FAA414AA22033B1A00AB0707 /* ViewController.swift */,
+				FAA414AA22033B1A00AB0707 /* MainViewController.swift */,
 				FA55BF8522E8897900137D0C /* PreferenceViewController.swift */,
 				FAA414AC22033B1A00AB0707 /* Main.storyboard */,
 				FAA414AF22033B1B00AB0707 /* Assets.xcassets */,
@@ -426,7 +426,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAA414AB22033B1A00AB0707 /* ViewController.swift in Sources */,
+				FAA414AB22033B1A00AB0707 /* MainViewController.swift in Sources */,
 				FA498B3122047BBF001391C1 /* BTGlobalTimer.swift in Sources */,
 				FACD62D42205BEDC00E4681C /* BTPreference.swift in Sources */,
 				FA55BF8622E8897900137D0C /* PreferenceViewController.swift in Sources */,
