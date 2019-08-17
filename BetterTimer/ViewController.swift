@@ -48,13 +48,26 @@ class ViewController: UIViewController {
   }()
 
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    UIView.animate(withDuration: 1) {
-      self.timerLabel.alpha = self.isShownViewComponent ? 1 : 0
-      self.restartButton.alpha = self.isShownViewComponent ? 1 : 0
-      self.preferenceButton.alpha = self.isShownViewComponent ? 1 : 0
-      self.statusBarHidden = !self.isShownViewComponent
-    }
-    isShownViewComponent.toggle()
+    UIView.animateKeyframes(withDuration: 6,
+                            delay: 0,
+                            options: .calculationModeCubic,
+                            animations: {
+        UIView.addKeyframe(withRelativeStartTime: 0,
+                           relativeDuration: 1.0 / 6.0) {
+                            self.timerLabel.alpha = 1
+                            self.restartButton.alpha = 1
+                            self.preferenceButton.alpha = 1
+                            self.statusBarHidden = false
+        }
+
+        UIView.addKeyframe(withRelativeStartTime: 2.0 / 6.0,
+                           relativeDuration: 4.0 / 6.0) {
+                            self.timerLabel.alpha = 0
+                            self.restartButton.alpha = 0
+                            self.preferenceButton.alpha = 0
+                            self.statusBarHidden = true
+        }
+    })
   }
 
   @objc func refresh() {
@@ -115,7 +128,6 @@ class ViewController: UIViewController {
 
     if Date() > userDefinedTime {
       completeTimer()
-//      return
     }
   }
 
@@ -159,7 +171,8 @@ class ViewController: UIViewController {
     BTGlobalTimer.sharedInstance.stopTimer()
     timerLabel.text = "Time out"
     timerLabel.alpha = 1
-    restartButton.isHidden = false
+    restartButton.alpha = 1
+    preferenceButton.alpha = 1
   }
 }
 
