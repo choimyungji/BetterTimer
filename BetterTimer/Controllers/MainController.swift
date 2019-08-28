@@ -7,7 +7,11 @@
 //
 
 import UIKit
-import UserNotifications
+
+
+import SnapKit
+import RxSwift
+import RxCocoa
 
 final class MainController: UIViewController {
   init(_ viewModel: MainViewModel) {
@@ -18,10 +22,10 @@ final class MainController: UIViewController {
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
-  let viewModel: MainViewModel
 
-  var userDefinedTime: Date?
+  let viewModel: MainViewModel
+  let disposeBag = DisposeBag()
+
   let defaultMargin: CGFloat = 24
   var isShownViewComponent: Bool = true
 
@@ -43,13 +47,11 @@ final class MainController: UIViewController {
   private lazy var restartButton = UIButton().then {
     $0.setTitle("Refresh", for: .normal)
     $0.setTitleColor(.red, for: .normal)
-    $0.addTarget(self, action: #selector(refresh), for: .touchUpInside)
   }
 
   private lazy var preferenceButton = UIButton().then {
     $0.setTitle("Edit", for: .normal)
     $0.setTitleColor(.red, for: .normal)
-    $0.addTarget(self, action: #selector(edit), for: .touchUpInside)
   }
 
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -75,33 +77,67 @@ final class MainController: UIViewController {
     })
   }
 
-  @objc func refresh() {
-    userDefinedTime = Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)
-    BTGlobalTimer.sharedInstance.startTimer(target: self, selector: #selector(self.fTimerAction))
-  }
-
-  @objc func edit() {
-    let preferenceViewController = PreferenceController()
-    let nav = UINavigationController(rootViewController: preferenceViewController)
-    self.present(nav, animated: true)
-  }
-
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    let line = UIScreen.main.bounds.width - (defaultMargin * 2)
-    let yPosition = UIScreen.main.bounds.height - 220
-    timerLabel.frame = CGRect(x: defaultMargin, y: yPosition, width: line, height: 30)
-    view.addSubview(timerLabel)
-    timerLabel.text = convertTimeInteger(with: BTPreference.getInstance.userDefinedTimeInterval)
+    setupUI()
+    setupBinding()
+  }
 
-    restartButton.frame = CGRect(x: defaultMargin, y: yPosition + 40, width: line, height: 30)
-    preferenceButton.frame = CGRect(x: defaultMargin,
-                                    y: UIScreen.main.bounds.height - 44,
-                                    width: 60,
-                                    height: 44)
+  func setupUI() {
+    view.backgroundColor = .white
+    view.addSubview(timerLabel)
+    timerLabel.snp.makeConstraints {
+      $0.bottom.equalToSuperview().offset(-220)
+      $0.leading.equalToSuperview().offset(defaultMargin)
+      $0.trailing.equalToSuperview().offset(-defaultMargin)
+      $0.height.equalTo(30)
+    }
+
     view.addSubview(restartButton)
+    restartButton.snp.makeConstraints {
+      $0.leading.equalToSuperview().offset(defaultMargin)
+      $0.trailing.equalToSuperview().offset(-defaultMargin)
+      $0.top.equalTo(timerLabel.snp.bottom).offset(8)
+      $0.height.equalTo(30)
+    }
+
     view.addSubview(preferenceButton)
+    preferenceButton.snp.makeConstraints {
+      $0.leading.equalToSuperview().offset(defaultMargin)
+      $0.width.equalTo(60)
+      $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-defaultMargin)
+      $0.height.equalTo(44)
+    }
+
+    arcView = MainArcView(frame: CGRect.zero)
+    view.addSubview(arcView!)
+    arcView?.snp.makeConstraints {
+      $0.leading.equalToSuperview().offset(defaultMargin)
+      $0.trailing.equalToSuperview().offset(-defaultMargin)
+      $0.centerY.equalToSuperview()
+      $0.height.equalTo(arcView!.snp.width)
+    }
+    statusBarHidden = true
+  }
+
+  func setupBinding() {
+    restartButton.rx.tap
+      .subscribe(viewModel.restartSubject)
+      .disposed(by: disposeBag)
+
+    preferenceButton.rx.tap
+      .subscribe(viewModel.preferenceSubject)
+      .disposed(by: disposeBag)
+
+    viewModel.currentTime
+      .bind(to: timerLabel.rx.text)
+      .disposed(by: disposeBag)
+
+    viewModel.timer
+      .subscribe(onNext: {
+        print($0)
+      }).disposed(by: disposeBag)
   }
 
   override func viewDidAppear(_ animated: Bool) {
@@ -110,74 +146,6 @@ final class MainController: UIViewController {
       self.restartButton.alpha = 0
       self.preferenceButton.alpha = 0
     }
-    userDefinedTime = Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)
-
-    BTGlobalTimer.sharedInstance.startTimer(target: self, selector: #selector(self.fTimerAction))
-    registerNotification()
-
-    let line = UIScreen.main.bounds.width - (defaultMargin * 2)
-    let yPostion = (UIScreen.main.bounds.height - line) / 2
-
-    arcView = MainArcView(frame: CGRect(x: defaultMargin, y: yPostion, width: line, height: line))
-    view.addSubview(arcView!)
-    statusBarHidden = true
-  }
-
-  @objc func fTimerAction(sender: Any?) {
-    guard let userDefinedTime = userDefinedTime else { return }
-
-    let degree = userDefinedTime.timeIntervalSince(Date()) / BTPreference.getInstance.userDefinedTimeInterval * 360
-
-    arcView?.setCircularSector(degree: CGFloat(degree))
-    timerLabel.text = convertTimeInteger(with: userDefinedTime.timeIntervalSince(Date()))
-
-    if Date() > userDefinedTime {
-      completeTimer()
-    }
-  }
-
-  func convertTimeInteger(with time: TimeInterval) -> String {
-    let intTime = Int(time)
-    let retValue = String(format: "%d:%02d", Int(intTime / 60), intTime % 60)
-    return retValue
-  }
-
-  func registerNotification() {
-    let options: UNAuthorizationOptions = [.alert, .sound]
-    let center = UNUserNotificationCenter.current()
-    center.requestAuthorization(options: options) { (granted, error) in
-      guard granted, error == nil else { return }
-
-      let calendar = Calendar.current
-      let components = calendar.dateComponents([.hour, .minute, .second], from: self.userDefinedTime!)
-
-      let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
-      let request = UNNotificationRequest(identifier: "timer",
-                                          content: self.makeNotificationContent(),
-                                          trigger: trigger)
-
-      center.add(request) { _ in
-        center.getPendingNotificationRequests(completionHandler: { _ in
-          print("notification add completed")
-        })
-      }
-    }
-  }
-
-  private func makeNotificationContent() -> UNMutableNotificationContent {
-    let content = UNMutableNotificationContent()
-    content.categoryIdentifier = "timer"
-    content.body = "Time Out"
-
-    return content
-  }
-
-  func completeTimer() {
-    BTGlobalTimer.sharedInstance.stopTimer()
-    timerLabel.text = "Time out"
-    timerLabel.alpha = 1
-    restartButton.alpha = 1
-    preferenceButton.alpha = 1
   }
 }
 
