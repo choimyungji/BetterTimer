@@ -15,6 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    window = UIWindow(frame: UIScreen.main.bounds)
+    window?.rootViewController =
+      MainController(MainViewModel(NotificationManager(),
+                                   timerManager: TimerManager()))
+    window?.makeKeyAndVisible()
     return true
   }
 
