@@ -6,6 +6,8 @@ target 'BetterTimer' do
   use_frameworks!
 
   # Pods for BetterTimer
+  pod 'RxSwift'
+  pod 'RxCocoa'
   pod 'SnapKit'
   pod 'Then'
   pod 'SwiftLint'
