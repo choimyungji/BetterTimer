@@ -9,7 +9,7 @@
 import UIKit
 import Then
 
-class PreferenceViewController: UIViewController {
+class PreferenceController: UIViewController {
   let defaultMargin: CGFloat = 24
 
   private var timerLabel = UILabel().then {

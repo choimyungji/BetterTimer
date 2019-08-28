@@ -9,7 +9,7 @@
 import UIKit
 import UserNotifications
 
-class MainViewController: UIViewController {
+class MainController: UIViewController {
   var userDefinedTime: Date?
   let defaultMargin: CGFloat = 24
   var isShownViewComponent: Bool = true
@@ -23,29 +23,23 @@ class MainViewController: UIViewController {
   }
 
   var arcView: MainArcView?
-  private lazy var timerLabel: UILabel = {
-    let label = UILabel()
-    label.textColor = .red
-    label.font = UIFont.systemFont(ofSize: 40, weight: .ultraLight)
-    label.textAlignment = .center
-    return label
-  }()
+  private lazy var timerLabel = UILabel().then {
+    $0.textColor = .red
+    $0.font = UIFont.systemFont(ofSize: 40, weight: .ultraLight)
+    $0.textAlignment = .center
+  }
 
-  private lazy var restartButton: UIButton = {
-    let button = UIButton()
-    button.setTitle("Refresh", for: .normal)
-    button.setTitleColor(.red, for: .normal)
-    button.addTarget(self, action: #selector(refresh), for: .touchUpInside)
-    return button
-  }()
+  private lazy var restartButton = UIButton().then {
+    $0.setTitle("Refresh", for: .normal)
+    $0.setTitleColor(.red, for: .normal)
+    $0.addTarget(self, action: #selector(refresh), for: .touchUpInside)
+  }
 
-  private lazy var preferenceButton: UIButton = {
-    let button = UIButton()
-    button.setTitle("Edit", for: .normal)
-    button.setTitleColor(.red, for: .normal)
-    button.addTarget(self, action: #selector(edit), for: .touchUpInside)
-    return button
-  }()
+  private lazy var preferenceButton = UIButton().then {
+    $0.setTitle("Edit", for: .normal)
+    $0.setTitleColor(.red, for: .normal)
+    $0.addTarget(self, action: #selector(edit), for: .touchUpInside)
+  }
 
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     UIView.animateKeyframes(withDuration: 6,
@@ -76,7 +70,7 @@ class MainViewController: UIViewController {
   }
 
   @objc func edit() {
-    let preferenceViewController = PreferenceViewController()
+    let preferenceViewController = PreferenceController()
     let nav = UINavigationController(rootViewController: preferenceViewController)
     self.present(nav, animated: true)
   }
@@ -176,7 +170,7 @@ class MainViewController: UIViewController {
   }
 }
 
-extension MainViewController {
+extension MainController {
   override var preferredStatusBarStyle: UIStatusBarStyle {
     return .default
   }
