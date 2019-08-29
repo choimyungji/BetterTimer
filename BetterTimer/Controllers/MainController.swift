@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 import SnapKit
 import RxSwift
 import RxCocoa
@@ -37,7 +36,7 @@ final class MainController: UIViewController {
     }
   }
 
-  var arcView: MainArcView?
+  private lazy var arcView = MainArcView()
   private lazy var timerLabel = UILabel().then {
     $0.textColor = .red
     $0.font = UIFont.systemFont(ofSize: 40, weight: .ultraLight)
@@ -111,41 +110,34 @@ final class MainController: UIViewController {
     }
 
     arcView = MainArcView(frame: CGRect.zero)
-    view.addSubview(arcView!)
-    arcView?.snp.makeConstraints {
+    view.addSubview(arcView)
+    arcView.snp.makeConstraints {
       $0.leading.equalToSuperview().offset(defaultMargin)
       $0.trailing.equalToSuperview().offset(-defaultMargin)
       $0.centerY.equalToSuperview()
-      $0.height.equalTo(arcView!.snp.width)
+      $0.height.equalTo(arcView.snp.width)
     }
     statusBarHidden = true
   }
 
   func setupBinding() {
     restartButton.rx.tap
-      .subscribe(viewModel.restartSubject)
+      .bind(to: viewModel.restartSubject)
       .disposed(by: disposeBag)
 
     preferenceButton.rx.tap
-      .subscribe(viewModel.preferenceSubject)
+      .bind(to: viewModel.preferenceSubject)
       .disposed(by: disposeBag)
 
     viewModel.currentTime
       .bind(to: timerLabel.rx.text)
       .disposed(by: disposeBag)
 
-    viewModel.timer
-      .subscribe(onNext: {
-        print($0)
-      }).disposed(by: disposeBag)
-  }
-
-  override func viewDidAppear(_ animated: Bool) {
-    UIView.animate(withDuration: 4) {
-      self.timerLabel.alpha = 0
-      self.restartButton.alpha = 0
-      self.preferenceButton.alpha = 0
-    }
+    viewModel.timeDegree
+      .subscribe(onNext: { [weak self] degree in
+        self?.arcView.setCircularSector(degree: degree)
+      })
+      .disposed(by: disposeBag)
   }
 }
 

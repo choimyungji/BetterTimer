@@ -14,11 +14,13 @@ import RxSwift
 protocol MainViewModelType: class {
   var restartSubject: PublishSubject<Void> { get }
   var preferenceSubject: PublishSubject<Void> { get }
+
   var currentTime: PublishSubject<String> { get }
-  var timer: Observable<Date> { get }
+  var timeDegree: BehaviorSubject<CGFloat> { get }
 }
 
 final class MainViewModel: MainViewModelType {
+
   init(_ notificationManager: NotificationManager,
        timerManager: TimerManager) {
     self.notificationManager = notificationManager
@@ -32,35 +34,53 @@ final class MainViewModel: MainViewModelType {
       .bind(onNext: edit)
       .disposed(by: disposeBag)
 
-    PublishSubject<Int>
-      .interval(1.0, scheduler: MainScheduler.instance)
+    let duration: DispatchTimeInterval = .seconds(Int(BTPreference.getInstance.userDefinedTimeInterval))
+
+    timer = Observable<Int>
+      .interval(.seconds(1), scheduler: MainScheduler.instance)
+      .take(duration, scheduler: MainScheduler.instance)
       .map { _ in Date() }
       .map { self.userDefinedTime.timeIntervalSince($0) }
-      .map { self.convertTimeInteger(with: $0) }
-      .subscribe(onNext: { [weak self] dfds in
-        print(dfds)
-        self?.currentTime.onNext(dfds)
-      })
+
+    timer?
+      .map { timeInterval in self.convertTimeInteger(with: timeInterval) }
+      .subscribe(
+        onNext: { [weak self] timeString in
+          self?.currentTime.onNext(timeString)
+        },
+        onCompleted: { [weak self] in
+          self?.currentTime.onNext("00:00")
+        })
       .disposed(by: disposeBag)
 
-//    timer = PublishSubject<Int>
-//      .interval(1.0, scheduler: MainScheduler.instance)
-//      .map { _ in Date() }
+    timer?
+      .map { CGFloat($0 / BTPreference.getInstance.userDefinedTimeInterval * 360) }
+      .debug()
+      .subscribe(
+        onNext: { [weak self] in
+          self?.timeDegree.onNext($0)
+        },
+        onCompleted: { [weak self] in
+          self?.timeDegree.onNext(0.0)
+        })
+      .disposed(by: disposeBag)
   }
 
   var restartSubject = PublishSubject<Void>()
   var preferenceSubject = PublishSubject<Void>()
   var currentTime = PublishSubject<String>()
-  var timer = Observable.just(Date())
+  var timeDegree = BehaviorSubject<CGFloat>(value: 0.0)
 
   private let notificationManager: NotificationManager
   private let timerManager: TimerManager
   private let disposeBag = DisposeBag()
+  private var timer: Observable<TimeInterval>?
 
-  var userDefinedTime =  Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)
+  private var userDefinedTime =  Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)
+
   func refresh() {
+    print("refresh")
     userDefinedTime = Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)
-//    BTGlobalTimer.sharedInstance.startTimer(target: self, selector: #selector(self.fTimerAction))
   }
 
   func edit() {
@@ -69,30 +89,13 @@ final class MainViewModel: MainViewModelType {
 //    self.present(nav, animated: true)
   }
 
-  func fTimerAction(sender: Any?) {
-//    guard let userDefinedTime = userDefinedTime else { return }
-
-    let degree = userDefinedTime.timeIntervalSince(Date()) / BTPreference.getInstance.userDefinedTimeInterval * 360
-
-//    arcView?.setCircularSector(degree: CGFloat(degree))
-//    timerLabel.text = convertTimeInteger(with: userDefinedTime.timeIntervalSince(Date()))
-
-    if Date() > userDefinedTime {
-      completeTimer()
-    }
-  }
-
-  func convertTimeInteger(with time: TimeInterval) -> String {
+  private func convertTimeInteger(with time: TimeInterval) -> String {
     let intTime = Int(time)
     let retValue = String(format: "%d:%02d", Int(intTime / 60), intTime % 60)
     return retValue
   }
 
-  func completeTimer() {
-    BTGlobalTimer.sharedInstance.stopTimer()
-//    timerLabel.text = "Time out"
-//    timerLabel.alpha = 1
-//    restartButton.alpha = 1
-//    preferenceButton.alpha = 1
+  private func checkComplete(_ degree: CGFloat) {
+    guard degree > 0.0 else { return }
   }
 }
