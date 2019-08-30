@@ -22,16 +22,18 @@ protocol MainViewModelType: class {
 final class MainViewModel: MainViewModelType {
 
   init(_ notificationManager: NotificationManager,
-       timerManager: TimerManager) {
+       timerManager: TimerManager,
+       navigationDelegate: NavigationDelegate) {
     self.notificationManager = notificationManager
     self.timerManager = timerManager
+    self.navigationDelegate = navigationDelegate
 
     restartSubject
       .bind(onNext: refresh)
       .disposed(by: disposeBag)
 
     preferenceSubject
-      .bind(onNext: edit)
+      .bind(onNext: navigationDelegate.preferenceButtonSelected)
       .disposed(by: disposeBag)
 
     let duration: DispatchTimeInterval = .seconds(Int(BTPreference.getInstance.userDefinedTimeInterval))
@@ -76,6 +78,7 @@ final class MainViewModel: MainViewModelType {
 
   private let notificationManager: NotificationManager
   private let timerManager: TimerManager
+  private let navigationDelegate: NavigationDelegate
   private let disposeBag = DisposeBag()
   private var timer: Observable<TimeInterval>?
 
@@ -83,12 +86,6 @@ final class MainViewModel: MainViewModelType {
 
   func refresh() {
     userDefinedTime = Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)
-  }
-
-  func edit() {
-    let preferenceViewController = PreferenceController()
-    let nav = UINavigationController(rootViewController: preferenceViewController)
-//    self.present(nav, animated: true)
   }
 
   private func convertTimeInteger(with time: TimeInterval) -> String {
