@@ -10,16 +10,16 @@ import Foundation
 import UserNotifications
 
 class NotificationManager {
-  var userDefinedTime: Date?
-  
-  func registerNotification() {
+//  var userDefinedTime: Date?
+
+  func registerNotification(date: Date) {
     let options: UNAuthorizationOptions = [.alert, .sound]
     let center = UNUserNotificationCenter.current()
     center.requestAuthorization(options: options) { (granted, error) in
       guard granted, error == nil else { return }
 
       let calendar = Calendar.current
-      let components = calendar.dateComponents([.hour, .minute, .second], from: self.userDefinedTime!)
+      let components = calendar.dateComponents([.hour, .minute, .second], from: date)
 
       let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
       let request = UNNotificationRequest(identifier: "timer",
@@ -41,5 +41,4 @@ class NotificationManager {
 
     return content
   }
-
 }
