@@ -64,6 +64,9 @@ final class MainViewModel: MainViewModelType {
           self?.timeDegree.onNext(0.0)
         })
       .disposed(by: disposeBag)
+
+    let date = Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)
+    notificationManager.registerNotification(date: date)
   }
 
   var restartSubject = PublishSubject<Void>()
@@ -79,7 +82,6 @@ final class MainViewModel: MainViewModelType {
   private var userDefinedTime =  Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)
 
   func refresh() {
-    print("refresh")
     userDefinedTime = Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)
   }
 
@@ -93,9 +95,5 @@ final class MainViewModel: MainViewModelType {
     let intTime = Int(time)
     let retValue = String(format: "%d:%02d", Int(intTime / 60), intTime % 60)
     return retValue
-  }
-
-  private func checkComplete(_ degree: CGFloat) {
-    guard degree > 0.0 else { return }
   }
 }
