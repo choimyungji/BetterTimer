@@ -56,7 +56,7 @@ final class MainViewModel: MainViewModelType {
       .disposed(by: disposeBag)
 
     timer?
-      .map { CGFloat($0 / BTPreference.getInstance.userDefinedTimeInterval * 360) }
+      .map { 360 - CGFloat($0 / BTPreference.getInstance.userDefinedTimeInterval * 360) }
       .debug()
       .subscribe(
         onNext: { [weak self] in

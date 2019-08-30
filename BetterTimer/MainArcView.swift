@@ -34,7 +34,7 @@ class MainArcView: UIView {
       $0.lineWidth = 80
       $0.strokeColor = UIColor.red.cgColor
       $0.fillColor = UIColor.white.cgColor
-      $0.strokeEnd = 1
+      $0.strokeEnd = 0
     }
     layer.addSublayer(arcLayer!)
   }
