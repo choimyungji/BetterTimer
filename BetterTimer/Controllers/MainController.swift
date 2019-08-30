@@ -44,13 +44,15 @@ final class MainController: UIViewController {
   }
 
   private lazy var restartButton = UIButton().then {
-    $0.setTitle("Refresh", for: .normal)
-    $0.setTitleColor(.red, for: .normal)
+    $0.setImage(UIImage(named: "reload")?.withRenderingMode(.alwaysTemplate), for: .normal)
+    $0.imageEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+    $0.tintColor = .red
   }
 
   private lazy var preferenceButton = UIButton().then {
-    $0.setTitle("Edit", for: .normal)
-    $0.setTitleColor(.red, for: .normal)
+    $0.setImage(UIImage(named: "settings")?.withRenderingMode(.alwaysTemplate), for: .normal)
+    $0.imageEdgeInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+    $0.tintColor = .red
   }
 
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -95,18 +97,18 @@ final class MainController: UIViewController {
 
     view.addSubview(restartButton)
     restartButton.snp.makeConstraints {
-      $0.leading.equalToSuperview().offset(defaultMargin)
-      $0.trailing.equalToSuperview().offset(-defaultMargin)
+      $0.centerX.equalToSuperview()
       $0.top.equalTo(timerLabel.snp.bottom).offset(8)
-      $0.height.equalTo(30)
+      $0.height.equalTo(40)
+      $0.width.equalTo(40)
     }
 
     view.addSubview(preferenceButton)
     preferenceButton.snp.makeConstraints {
       $0.leading.equalToSuperview().offset(defaultMargin)
-      $0.width.equalTo(60)
-      $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-defaultMargin)
-      $0.height.equalTo(44)
+      $0.width.equalTo(40)
+      $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
+      $0.height.equalTo(40)
     }
 
     arcView = MainArcView(frame: CGRect.zero)
