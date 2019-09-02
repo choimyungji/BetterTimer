@@ -15,7 +15,7 @@ protocol MainViewModelType: class {
   var restartSubject: PublishSubject<Void> { get }
   var preferenceSubject: PublishSubject<Void> { get }
 
-  var currentTime: PublishSubject<String> { get }
+  var currentTime: ReplaySubject<String> { get }
   var timeDegree: BehaviorSubject<CGFloat> { get }
 }
 
@@ -43,7 +43,6 @@ final class MainViewModel: MainViewModelType {
       .take(duration, scheduler: MainScheduler.instance)
       .map { _ in Date() }
       .map { self.userDefinedTime.timeIntervalSince($0)}
-      .debug()
 
     timer?
       .map { timeInterval in self.convertTimeInteger(with: timeInterval + 1) }
@@ -67,13 +66,15 @@ final class MainViewModel: MainViewModelType {
         })
       .disposed(by: disposeBag)
 
+    currentTime.onNext(convertTimeInteger(with: BTPreference.getInstance.userDefinedTimeInterval))
+
     let date = Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)
     notificationManager.registerNotification(date: date)
   }
 
   var restartSubject = PublishSubject<Void>()
   var preferenceSubject = PublishSubject<Void>()
-  var currentTime = PublishSubject<String>()
+  var currentTime = ReplaySubject<String>.create(bufferSize: 1)
   var timeDegree = BehaviorSubject<CGFloat>(value: 0.0)
 
   private let notificationManager: NotificationManager
