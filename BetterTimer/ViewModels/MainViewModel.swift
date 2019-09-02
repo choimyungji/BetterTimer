@@ -42,10 +42,11 @@ final class MainViewModel: MainViewModelType {
       .interval(.seconds(1), scheduler: MainScheduler.instance)
       .take(duration, scheduler: MainScheduler.instance)
       .map { _ in Date() }
-      .map { self.userDefinedTime.timeIntervalSince($0) }
+      .map { self.userDefinedTime.timeIntervalSince($0)}
+      .debug()
 
     timer?
-      .map { timeInterval in self.convertTimeInteger(with: timeInterval) }
+      .map { timeInterval in self.convertTimeInteger(with: timeInterval + 1) }
       .subscribe(
         onNext: { [weak self] timeString in
           self?.currentTime.onNext(timeString)
@@ -56,8 +57,7 @@ final class MainViewModel: MainViewModelType {
       .disposed(by: disposeBag)
 
     timer?
-      .map { 360 - CGFloat($0 / BTPreference.getInstance.userDefinedTimeInterval * 360) }
-      .debug()
+      .map { CGFloat($0 / BTPreference.getInstance.userDefinedTimeInterval * 360) }
       .subscribe(
         onNext: { [weak self] in
           self?.timeDegree.onNext($0)
