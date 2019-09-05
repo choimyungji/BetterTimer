@@ -28,7 +28,8 @@ class AppCoordinator: Coordinator {
     let controller = MainController(MainViewModel(NotificationManager(),
                                                   timerManager: TimerManager(),
                                                   navigationDelegate: self))
-    window.rootViewController = controller
+    navigationController.setViewControllers([controller], animated: false)
+    window.rootViewController = navigationController
     window.makeKeyAndVisible()
 
     mainViewController = controller
@@ -38,7 +39,8 @@ class AppCoordinator: Coordinator {
 extension AppCoordinator: NavigationDelegate {
   func preferenceButtonSelected() {
     let preferenceViewController = PreferenceController()
-    let nav = UINavigationController(rootViewController: preferenceViewController)
-    mainViewController?.present(nav, animated: true)
+
+    mainViewController?.navigationController?.pushViewController(preferenceViewController, animated: true)
+    mainViewController?.navigationController?.navigationBar.isHidden = false
   }
 }

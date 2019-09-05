@@ -85,7 +85,12 @@ final class MainController: UIViewController {
     setupBinding()
   }
 
+  override func viewWillAppear(_ animated: Bool) {
+    navigationController?.navigationBar.isHidden = true
+  }
+
   func setupUI() {
+//    navigationController?.navigationBar.isHidden = true
     view.backgroundColor = .white
     view.addSubview(timerLabel)
     timerLabel.snp.makeConstraints {
@@ -132,6 +137,7 @@ final class MainController: UIViewController {
       .disposed(by: disposeBag)
 
     viewModel.currentTime
+      .debug()
       .bind(to: timerLabel.rx.text)
       .disposed(by: disposeBag)
 
