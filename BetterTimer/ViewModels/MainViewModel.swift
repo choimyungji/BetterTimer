@@ -36,15 +36,7 @@ final class MainViewModel: MainViewModelType {
       .bind(onNext: navigationDelegate.preferenceButtonSelected)
       .disposed(by: disposeBag)
 
-    let duration: DispatchTimeInterval = .seconds(Int(BTPreference.getInstance.userDefinedTimeInterval))
-
-    timer = Observable<Int>
-      .interval(.seconds(1), scheduler: MainScheduler.instance)
-      .take(duration, scheduler: MainScheduler.instance)
-      .map { _ in Date() }
-      .map { self.userDefinedTime.timeIntervalSince($0)}
-
-    timer?
+    timerManager.timer?
       .map { timeInterval in self.convertTimeInteger(with: timeInterval + 1) }
       .subscribe(
         onNext: { [weak self] timeString in
@@ -55,7 +47,7 @@ final class MainViewModel: MainViewModelType {
         })
       .disposed(by: disposeBag)
 
-    timer?
+    timerManager.timer?
       .map { CGFloat($0 / BTPreference.getInstance.userDefinedTimeInterval * 360) }
       .subscribe(
         onNext: { [weak self] in
@@ -81,12 +73,9 @@ final class MainViewModel: MainViewModelType {
   private let timerManager: TimerManager
   private let navigationDelegate: NavigationDelegate
   private let disposeBag = DisposeBag()
-  private var timer: Observable<TimeInterval>?
-
-  private var userDefinedTime =  Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)
 
   func refresh() {
-    userDefinedTime = Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)
+    timerManager.userDefinedTime = Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)
   }
 
   private func convertTimeInteger(with time: TimeInterval) -> String {
