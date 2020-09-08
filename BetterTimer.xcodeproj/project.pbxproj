@@ -55,6 +55,7 @@
 		90DFE2216651A87955C2F1AA /* Pods-BetterTimerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BetterTimerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BetterTimerUITests/Pods-BetterTimerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		BF7D9437257A11198390ED5E /* Pods_BetterTimer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BetterTimer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D09E856BAF827FE2C35F05AD /* Pods-BetterTimer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BetterTimer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BetterTimer/Pods-BetterTimer.debug.xcconfig"; sourceTree = "<group>"; };
+		FA00EF712507BBC6008F1521 /* BetterTimer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BetterTimer.entitlements; sourceTree = "<group>"; };
 		FA498B3022047BBF001391C1 /* BTGlobalTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTGlobalTimer.swift; sourceTree = "<group>"; };
 		FA498B322204800F001391C1 /* MainArcView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainArcView.swift; sourceTree = "<group>"; };
 		FA55BF8522E8897900137D0C /* PreferenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceController.swift; sourceTree = "<group>"; };
@@ -191,6 +192,7 @@
 		FAA414A722033B1A00AB0707 /* BetterTimer */ = {
 			isa = PBXGroup;
 			children = (
+				FA00EF712507BBC6008F1521 /* BetterTimer.entitlements */,
 				FA6A8B9B2318E2790090C1BA /* Coordinator */,
 				FA6A8B962316A26D0090C1BA /* Managers */,
 				FA6A8B9223168BB50090C1BA /* ViewModels */,
@@ -633,6 +635,7 @@
 			baseConfigurationReference = D09E856BAF827FE2C35F05AD /* Pods-BetterTimer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BetterTimer/BetterTimer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JVM82SQA75;
 				INFOPLIST_FILE = BetterTimer/Info.plist;
@@ -642,6 +645,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.BetterTimer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -652,6 +656,7 @@
 			baseConfigurationReference = 5EC673F83FADA2C3FE3DD1EF /* Pods-BetterTimer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = BetterTimer/BetterTimer.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JVM82SQA75;
 				INFOPLIST_FILE = BetterTimer/Info.plist;
@@ -661,6 +666,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.BetterTimer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
