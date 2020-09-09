@@ -19,11 +19,11 @@ protocol MainViewModelType: class {
   var timeDegree: BehaviorSubject<CGFloat> { get }
 }
 
-final class MainViewModel: MainViewModelType {
+final class MainViewModel: MainViewModelType, ObservableObject {
 
   init(_ notificationManager: NotificationManager,
        timerManager: TimerManager,
-       navigationDelegate: NavigationDelegate) {
+       navigationDelegate: NavigationDelegate?) {
     self.notificationManager = notificationManager
     self.timerManager = timerManager
     self.navigationDelegate = navigationDelegate
@@ -32,9 +32,9 @@ final class MainViewModel: MainViewModelType {
       .bind(onNext: refresh)
       .disposed(by: disposeBag)
 
-    preferenceSubject
-      .bind(onNext: navigationDelegate.preferenceButtonSelected)
-      .disposed(by: disposeBag)
+//    preferenceSubject
+//        .bind(onNext: navigationDelegate?.preferenceButtonSelected)
+//      .disposed(by: disposeBag)
 
     timerManager.timer?
       .map { timeInterval in self.convertTimeInteger(with: timeInterval + 1) }
@@ -71,7 +71,7 @@ final class MainViewModel: MainViewModelType {
 
   private let notificationManager: NotificationManager
   private let timerManager: TimerManager
-  private let navigationDelegate: NavigationDelegate
+  private let navigationDelegate: NavigationDelegate?
   private let disposeBag = DisposeBag()
 
   func refresh() {
