@@ -18,11 +18,11 @@ class BTPreference: NSObject {
   }
 
   var userDefinedTimeInterval: TimeInterval {
-    set (newVal) {
-      UserDefaults().set(newVal, forKey: userDefinedTimeIntervalKey)
-    }
     get {
       return UserDefaults().object(forKey: userDefinedTimeIntervalKey) as? TimeInterval ?? 25.0 * 60
+    }
+    set (newVal) {
+      UserDefaults().set(newVal, forKey: userDefinedTimeIntervalKey)
     }
   }
 }

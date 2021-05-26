@@ -71,7 +71,7 @@ final class MainViewModel: MainViewModelType, ObservableObject {
 
   private let notificationManager: NotificationManager
   private let timerManager: TimerManager
-  private let navigationDelegate: NavigationDelegate?
+  private weak var navigationDelegate: NavigationDelegate?
   private let disposeBag = DisposeBag()
 
   func refresh() {
