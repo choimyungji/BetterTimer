@@ -11,7 +11,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-protocol MainViewModelType: class {
+protocol MainViewModelType: AnyObject {
   var restartSubject: PublishSubject<Void> { get }
   var preferenceSubject: PublishSubject<Void> { get }
 

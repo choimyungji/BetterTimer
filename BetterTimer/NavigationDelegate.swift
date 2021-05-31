@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol NavigationDelegate: class {
+protocol NavigationDelegate: AnyObject {
   func preferenceButtonSelected()
 }
