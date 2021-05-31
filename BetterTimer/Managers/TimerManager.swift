@@ -18,7 +18,7 @@ class TimerManager {
 
     timer = Observable<Int>
       .interval(.seconds(1), scheduler: MainScheduler.instance)
-      .take(duration, scheduler: MainScheduler.instance)
+      .take(for: duration, scheduler: MainScheduler.instance)
       .map { _ in Date() }
       .map { self.userDefinedTime.timeIntervalSince($0)}
   }
