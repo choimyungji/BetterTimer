@@ -7,19 +7,20 @@
 //
 
 import Foundation
+//import Combine
 
-import RxCocoa
-import RxSwift
+//import RxCocoa
+//import RxSwift
+//
+//protocol MainViewModelType: AnyObject {
+//    var restartSubject: PublishSubject<Void> { get }
+//    var preferenceSubject: PublishSubject<Void> { get }
+//
+//    var currentTime: ReplaySubject<String> { get }
+//    var timeDegree: BehaviorSubject<CGFloat> { get }
+//}
 
-protocol MainViewModelType: AnyObject {
-  var restartSubject: PublishSubject<Void> { get }
-  var preferenceSubject: PublishSubject<Void> { get }
-
-  var currentTime: ReplaySubject<String> { get }
-  var timeDegree: BehaviorSubject<CGFloat> { get }
-}
-
-final class MainViewModel: MainViewModelType, ObservableObject {
+final class MainViewModel: ObservableObject {
 
   init(_ notificationManager: NotificationManager,
        timerManager: TimerManager,
@@ -28,51 +29,18 @@ final class MainViewModel: MainViewModelType, ObservableObject {
     self.timerManager = timerManager
     self.navigationDelegate = navigationDelegate
 
-    restartSubject
-      .bind(onNext: refresh)
-      .disposed(by: disposeBag)
-
-//    preferenceSubject
-//        .bind(onNext: navigationDelegate?.preferenceButtonSelected)
-//      .disposed(by: disposeBag)
-
-    timerManager.timer?
-      .map { timeInterval in self.convertTimeInteger(with: timeInterval + 1) }
-      .subscribe(
-        onNext: { [weak self] timeString in
-          self?.currentTime.onNext(timeString)
-        },
-        onCompleted: { [weak self] in
-          self?.currentTime.onNext("00:00")
-        })
-      .disposed(by: disposeBag)
-
-    timerManager.timer?
-      .map { CGFloat($0 / BTPreference.getInstance.userDefinedTimeInterval * 360) }
-      .subscribe(
-        onNext: { [weak self] in
-          self?.timeDegree.onNext($0)
-        },
-        onCompleted: { [weak self] in
-          self?.timeDegree.onNext(0.0)
-        })
-      .disposed(by: disposeBag)
-
-    currentTime.onNext(convertTimeInteger(with: BTPreference.getInstance.userDefinedTimeInterval))
-
     let date = Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)
     notificationManager.registerNotification(date: date)
   }
 
-  var restartSubject = PublishSubject<Void>()
-  var preferenceSubject = PublishSubject<Void>()
-  var currentTime = ReplaySubject<String>.create(bufferSize: 1)
-  var timeDegree = BehaviorSubject<CGFloat>(value: 0.0)
+//    var restartSubject = PassthroughSubject<Void, Error>()
+//    var preferenceSubject = PassthroughSubject<Void, Error>()
+//    var currentTime = ReplaySubject<String>.create(bufferSize: 1)
+//    var timeDegree = BehaviorSubject<CGFloat>(value: 0.0)
 
   private let notificationManager: NotificationManager
   private let timerManager: TimerManager
   private weak var navigationDelegate: NavigationDelegate?
-  private let disposeBag = DisposeBag()
 
   func refresh() {
     timerManager.userDefinedTime = Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)

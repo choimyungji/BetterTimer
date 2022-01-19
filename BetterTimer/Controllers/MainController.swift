@@ -82,7 +82,7 @@ final class MainController: UIViewController {
     super.viewDidLoad()
 
     setupUI()
-    setupBinding()
+//    setupBinding()
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -127,26 +127,26 @@ final class MainController: UIViewController {
     statusBarHidden = true
   }
 
-  func setupBinding() {
-    restartButton.rx.tap
-      .bind(to: viewModel.restartSubject)
-      .disposed(by: disposeBag)
-
-    preferenceButton.rx.tap
-      .bind(to: viewModel.preferenceSubject)
-      .disposed(by: disposeBag)
-
-    viewModel.currentTime
-      .debug()
-      .bind(to: timerLabel.rx.text)
-      .disposed(by: disposeBag)
-
-    viewModel.timeDegree
-      .subscribe(onNext: { [weak self] degree in
-        self?.arcView.setCircularSector(degree: degree)
-      })
-      .disposed(by: disposeBag)
-  }
+//  func setupBinding() {
+//    restartButton.rx.tap
+//      .bind(to: viewModel.restartSubject)
+//      .disposed(by: disposeBag)
+//
+//    preferenceButton.rx.tap
+//      .bind(to: viewModel.preferenceSubject)
+//      .disposed(by: disposeBag)
+//
+//    viewModel.currentTime
+//      .debug()
+//      .bind(to: timerLabel.rx.text)
+//      .disposed(by: disposeBag)
+//
+//    viewModel.timeDegree
+//      .subscribe(onNext: { [weak self] degree in
+//        self?.arcView.setCircularSector(degree: degree)
+//      })
+//      .disposed(by: disposeBag)
+//  }
 }
 
 extension MainController {

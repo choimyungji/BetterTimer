@@ -7,19 +7,15 @@
 //
 
 import Foundation
-import RxSwift
 
 class TimerManager {
-  var timer: Observable<TimeInterval>?
-  var userDefinedTime =  Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)
-
-  init() {
-    let duration: DispatchTimeInterval = .seconds(Int(BTPreference.getInstance.userDefinedTimeInterval))
-
-    timer = Observable<Int>
-      .interval(.seconds(1), scheduler: MainScheduler.instance)
-      .take(for: duration, scheduler: MainScheduler.instance)
-      .map { _ in Date() }
-      .map { self.userDefinedTime.timeIntervalSince($0)}
-  }
+    var timer: Timer?
+    var userDefinedTime =  Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)
+    
+    init() {
+        let duration: TimeInterval = BTPreference.getInstance.userDefinedTimeInterval
+        timer = Timer.scheduledTimer(withTimeInterval: duration, repeats: false, block: { _ in
+            print("FIRE!!!")
+        })
+    }
 }
