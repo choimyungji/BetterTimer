@@ -12,15 +12,13 @@ import SwiftUI
 
 struct MainView: View {
     @EnvironmentObject var viewModel: MainViewModel
-    @State var degree: Double = 90
-
-//    let viewModel: MainViewModel
-//    init(_ degree: Double) {
-//        self.degree = degree
-//    }
+    @State var degree: Double = 0
 
     var body: some View {
         MainArcShape(degree: degree).foregroundColor(.red)
+            .onAppear {
+                viewModel.refresh()
+            }
     }
 }
 
@@ -30,9 +28,9 @@ struct MainArcShape: Shape {
         var path = Path()
         path.addArc(center: CGPoint(x: rect.maxX / 2, y: rect.maxY / 2),
                     radius: (rect.width - (46 * 2)) / 2,
-                    startAngle: .degrees(90),
-                    endAngle: .degrees(degree),
-                    clockwise: true)
+                    startAngle: .degrees(-90),
+                    endAngle: .degrees(degree-90),
+                    clockwise: false)
 
         return path
             .strokedPath(StrokeStyle(lineWidth: 100))
