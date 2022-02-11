@@ -7,48 +7,46 @@
 //
 
 import Foundation
-//import Combine
+import Combine
+import SwiftUI
 
-//import RxCocoa
-//import RxSwift
-//
-//protocol MainViewModelType: AnyObject {
-//    var restartSubject: PublishSubject<Void> { get }
-//    var preferenceSubject: PublishSubject<Void> { get }
-//
-//    var currentTime: ReplaySubject<String> { get }
-//    var timeDegree: BehaviorSubject<CGFloat> { get }
-//}
+protocol MainViewModelDelegate: AnyObject {
+    func tick()
+}
 
 final class MainViewModel: ObservableObject {
 
-  init(_ notificationManager: NotificationManager,
-       timerManager: TimerManager,
-       navigationDelegate: NavigationDelegate?) {
-    self.notificationManager = notificationManager
-    self.timerManager = timerManager
-    self.navigationDelegate = navigationDelegate
+    init(notificationManager: NotificationManager = NotificationManager(),
+         timerManager: TimerManager = TimerManager(),
+         navigationDelegate: NavigationDelegate? = nil) {
 
-    let date = Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)
-    notificationManager.registerNotification(date: date)
-  }
+        self.notificationManager = notificationManager
+        self.timerManager = timerManager
+        self.navigationDelegate = navigationDelegate
 
-//    var restartSubject = PassthroughSubject<Void, Error>()
-//    var preferenceSubject = PassthroughSubject<Void, Error>()
-//    var currentTime = ReplaySubject<String>.create(bufferSize: 1)
-//    var timeDegree = BehaviorSubject<CGFloat>(value: 0.0)
+        let date = Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)
+        notificationManager.registerNotification(date: date)
+    }
 
-  private let notificationManager: NotificationManager
-  private let timerManager: TimerManager
-  private weak var navigationDelegate: NavigationDelegate?
+    weak var delegate: MainViewModelDelegate?
 
-  func refresh() {
-    timerManager.userDefinedTime = Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)
-  }
+    private let notificationManager: NotificationManager
+    @ObservedObject var timerManager: TimerManager
+    private weak var navigationDelegate: NavigationDelegate?
+    @Published var seconds: Double = 0
+    func start() {
+        timerManager.start {
+            self.seconds = self.timerManager.count
+        }
+    }
 
-  private func convertTimeInteger(with time: TimeInterval) -> String {
-    let intTime = Int(time)
-    let retValue = String(format: "%d:%02d", Int(intTime / 60), intTime % 60)
-    return retValue
-  }
+    func refresh() {
+        timerManager.userDefinedTime = Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)
+    }
+
+    private func convertTimeInteger(with time: TimeInterval) -> String {
+        let intTime = Int(time)
+        let retValue = String(format: "%d:%02d", Int(intTime / 60), intTime % 60)
+        return retValue
+    }
 }

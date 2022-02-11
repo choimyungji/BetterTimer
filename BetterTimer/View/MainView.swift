@@ -9,21 +9,23 @@
 import Foundation
 
 import SwiftUI
+import Combine
 
 struct MainView: View {
-    @EnvironmentObject var viewModel: MainViewModel
-    @State var degree: Double = 0
+    @ObservedObject var viewModel: MainViewModel
 
     var body: some View {
-        MainArcShape(degree: degree).foregroundColor(.red)
+        MainArcShape(degree: $viewModel.timerManager.count).foregroundColor(.red)
             .onAppear {
-                viewModel.refresh()
+                viewModel.start()
             }
+        Text("\(viewModel.timerManager.count)")
     }
 }
 
 struct MainArcShape: Shape {
-    @State var degree: Double
+    @Binding var degree: Double
+
     func path(in rect: CGRect) -> Path {
         var path = Path()
         path.addArc(center: CGPoint(x: rect.maxX / 2, y: rect.maxY / 2),
@@ -39,6 +41,6 @@ struct MainArcShape: Shape {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        MainView(viewModel: MainViewModel())
     }
 }

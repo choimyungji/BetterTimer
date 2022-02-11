@@ -25,7 +25,7 @@ class AppCoordinator: Coordinator {
   var childCoordinators: [Coordinator] = []
 
   func start() {
-    let controller = MainController(MainViewModel(NotificationManager(),
+      let controller = MainController(MainViewModel(notificationManager: NotificationManager(),
                                                   timerManager: TimerManager(),
                                                   navigationDelegate: self))
     navigationController.setViewControllers([controller], animated: false)

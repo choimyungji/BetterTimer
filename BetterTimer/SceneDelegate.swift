@@ -18,11 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                options connectionOptions: UIScene.ConnectionOptions) {
 
         // Create the SwiftUI view that provides the window contents.
-        let viewModel = MainViewModel(NotificationManager(),
-        timerManager: TimerManager(),
-        navigationDelegate: nil)
-        let mainView = MainView()
-            .environmentObject(viewModel)
+        let mainView = MainView(viewModel: MainViewModel())
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
