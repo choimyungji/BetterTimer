@@ -15,11 +15,12 @@ struct MainView: View {
     @ObservedObject var viewModel: MainViewModel
 
     var body: some View {
-        MainArcShape(degree: $viewModel.timerManager.count).foregroundColor(.red)
+        MainArcShape(degree: $viewModel.seconds)
+            .foregroundColor(.red)
             .onAppear {
                 viewModel.start()
             }
-        Text("\(viewModel.timerManager.count)")
+        Text("\(String(viewModel.seconds))")
     }
 }
 

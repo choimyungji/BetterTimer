@@ -23,7 +23,7 @@ final class MainViewModel: ObservableObject {
     }
 
     private let notificationManager: NotificationManager
-    @ObservedObject var timerManager: TimerManager
+    @ObservedObject private var timerManager: TimerManager
 
     @Published var seconds: Double = 0
     func start() {
