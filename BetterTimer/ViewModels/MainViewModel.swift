@@ -10,29 +10,21 @@ import Foundation
 import Combine
 import SwiftUI
 
-protocol MainViewModelDelegate: AnyObject {
-    func tick()
-}
-
 final class MainViewModel: ObservableObject {
 
     init(notificationManager: NotificationManager = NotificationManager(),
-         timerManager: TimerManager = TimerManager(),
-         navigationDelegate: NavigationDelegate? = nil) {
+         timerManager: TimerManager = TimerManager()) {
 
         self.notificationManager = notificationManager
         self.timerManager = timerManager
-        self.navigationDelegate = navigationDelegate
 
         let date = Date().addingTimeInterval(Preference.shared.userDefinedTimeInterval)
         notificationManager.registerNotification(date: date)
     }
 
-    weak var delegate: MainViewModelDelegate?
-
     private let notificationManager: NotificationManager
     @ObservedObject var timerManager: TimerManager
-    private weak var navigationDelegate: NavigationDelegate?
+
     @Published var seconds: Double = 0
     func start() {
         timerManager.start {

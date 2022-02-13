@@ -19,8 +19,6 @@
 		FA6A8B9423168C100090C1BA /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6A8B9323168C100090C1BA /* MainViewModel.swift */; };
 		FA6A8B982316A28A0090C1BA /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6A8B972316A28A0090C1BA /* NotificationManager.swift */; };
 		FA6A8B9A2316A2A30090C1BA /* TimerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6A8B992316A2A30090C1BA /* TimerManager.swift */; };
-		FA6A8B9D2318E2860090C1BA /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6A8B9C2318E2860090C1BA /* Coordinator.swift */; };
-		FA6A8B9F2318E3300090C1BA /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6A8B9E2318E3300090C1BA /* AppCoordinator.swift */; };
 		FA6A8BA12318EB9A0090C1BA /* NavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6A8BA02318EB9A0090C1BA /* NavigationDelegate.swift */; };
 		FAA414A922033B1A00AB0707 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA414A822033B1A00AB0707 /* AppDelegate.swift */; };
 		FAA414AB22033B1A00AB0707 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA414AA22033B1A00AB0707 /* MainController.swift */; };
@@ -67,8 +65,6 @@
 		FA6A8B9323168C100090C1BA /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		FA6A8B972316A28A0090C1BA /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		FA6A8B992316A2A30090C1BA /* TimerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerManager.swift; sourceTree = "<group>"; };
-		FA6A8B9C2318E2860090C1BA /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		FA6A8B9E2318E3300090C1BA /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		FA6A8BA02318EB9A0090C1BA /* NavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationDelegate.swift; sourceTree = "<group>"; };
 		FAA414A522033B1A00AB0707 /* BetterTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BetterTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAA414A822033B1A00AB0707 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -170,15 +166,6 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
-		FA6A8B9B2318E2790090C1BA /* Coordinator */ = {
-			isa = PBXGroup;
-			children = (
-				FA6A8B9C2318E2860090C1BA /* Coordinator.swift */,
-				FA6A8B9E2318E3300090C1BA /* AppCoordinator.swift */,
-			);
-			path = Coordinator;
-			sourceTree = "<group>";
-		};
 		FAA4149C22033B1A00AB0707 = {
 			isa = PBXGroup;
 			children = (
@@ -206,7 +193,6 @@
 			children = (
 				FA00EF972507C2DA008F1521 /* View */,
 				FA00EF712507BBC6008F1521 /* BetterTimer.entitlements */,
-				FA6A8B9B2318E2790090C1BA /* Coordinator */,
 				FA6A8B962316A26D0090C1BA /* Managers */,
 				FA6A8B9223168BB50090C1BA /* ViewModels */,
 				FA6A8B91231689780090C1BA /* Controllers */,
@@ -481,11 +467,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA6A8B9F2318E3300090C1BA /* AppCoordinator.swift in Sources */,
 				FA00EF992507C304008F1521 /* MainView.swift in Sources */,
 				FA6A8B9423168C100090C1BA /* MainViewModel.swift in Sources */,
 				FAA414AB22033B1A00AB0707 /* MainController.swift in Sources */,
-				FA6A8B9D2318E2860090C1BA /* Coordinator.swift in Sources */,
 				FA498B3122047BBF001391C1 /* BTGlobalTimer.swift in Sources */,
 				FACD62D42205BEDC00E4681C /* Preference.swift in Sources */,
 				FA55BF8622E8897900137D0C /* PreferenceController.swift in Sources */,

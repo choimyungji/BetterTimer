@@ -10,7 +10,6 @@ import Foundation
 import UserNotifications
 
 class NotificationManager {
-//  var userDefinedTime: Date?
 
   func registerNotification(date: Date) {
     let options: UNAuthorizationOptions = [.alert, .sound]
