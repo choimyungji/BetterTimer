@@ -20,7 +20,7 @@ class PreferenceController: UIViewController {
 
   private var timerField = UITextField().then {
     $0.borderStyle = UITextField.BorderStyle.line
-    $0.text = String(BTPreference.getInstance.userDefinedTimeInterval)
+    $0.text = String(Preference.shared.userDefinedTimeInterval)
   }
 
   private var okButton = UIButton().then {

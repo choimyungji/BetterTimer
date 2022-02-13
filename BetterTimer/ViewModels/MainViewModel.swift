@@ -24,7 +24,7 @@ final class MainViewModel: ObservableObject {
         self.timerManager = timerManager
         self.navigationDelegate = navigationDelegate
 
-        let date = Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)
+        let date = Date().addingTimeInterval(Preference.shared.userDefinedTimeInterval)
         notificationManager.registerNotification(date: date)
     }
 
@@ -41,7 +41,7 @@ final class MainViewModel: ObservableObject {
     }
 
     func refresh() {
-        timerManager.userDefinedTime = Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)
+        timerManager.userDefinedTime = Date().addingTimeInterval(Preference.shared.userDefinedTimeInterval)
     }
 
     private func convertTimeInteger(with time: TimeInterval) -> String {

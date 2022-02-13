@@ -11,11 +11,12 @@ import Combine
 
 class TimerManager: ObservableObject {
     var timer: Timer?
-    var userDefinedTime =  Date().addingTimeInterval(BTPreference.getInstance.userDefinedTimeInterval)
+    var userDefinedTime =  Date().addingTimeInterval(Preference.shared.userDefinedTimeInterval)
 
     @Published var count: TimeInterval = 0
+
     func start(completion: @escaping () -> Void) {
-        let duration: TimeInterval = BTPreference.getInstance.userDefinedTimeInterval
+        let duration: TimeInterval = Preference.shared.userDefinedTimeInterval
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] _ in
             guard let self = self else { return }
             guard self.count < duration else {

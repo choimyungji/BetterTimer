@@ -27,7 +27,7 @@
 		FAA414B022033B1B00AB0707 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAA414AF22033B1B00AB0707 /* Assets.xcassets */; };
 		FAA414BE22033B1B00AB0707 /* BetterTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA414BD22033B1B00AB0707 /* BetterTimerTests.swift */; };
 		FAA414C922033B1B00AB0707 /* BetterTimerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA414C822033B1B00AB0707 /* BetterTimerUITests.swift */; };
-		FACD62D42205BEDC00E4681C /* BTPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD62D32205BEDC00E4681C /* BTPreference.swift */; };
+		FACD62D42205BEDC00E4681C /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACD62D32205BEDC00E4681C /* Preference.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,7 +81,7 @@
 		FAA414C422033B1B00AB0707 /* BetterTimerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BetterTimerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAA414C822033B1B00AB0707 /* BetterTimerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetterTimerUITests.swift; sourceTree = "<group>"; };
 		FAA414CA22033B1B00AB0707 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FACD62D32205BEDC00E4681C /* BTPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTPreference.swift; sourceTree = "<group>"; };
+		FACD62D32205BEDC00E4681C /* Preference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,7 +215,7 @@
 				FAA414AF22033B1B00AB0707 /* Assets.xcassets */,
 				FAA414B422033B1B00AB0707 /* Info.plist */,
 				FA498B322204800F001391C1 /* MainArcView.swift */,
-				FACD62D32205BEDC00E4681C /* BTPreference.swift */,
+				FACD62D32205BEDC00E4681C /* Preference.swift */,
 				FA6245DA222979A10029152E /* LaunchScreen.storyboard */,
 				FA6A8BA02318EB9A0090C1BA /* NavigationDelegate.swift */,
 			);
@@ -487,7 +487,7 @@
 				FAA414AB22033B1A00AB0707 /* MainController.swift in Sources */,
 				FA6A8B9D2318E2860090C1BA /* Coordinator.swift in Sources */,
 				FA498B3122047BBF001391C1 /* BTGlobalTimer.swift in Sources */,
-				FACD62D42205BEDC00E4681C /* BTPreference.swift in Sources */,
+				FACD62D42205BEDC00E4681C /* Preference.swift in Sources */,
 				FA55BF8622E8897900137D0C /* PreferenceController.swift in Sources */,
 				FA498B332204800F001391C1 /* MainArcView.swift in Sources */,
 				FA00EF962507C24B008F1521 /* SceneDelegate.swift in Sources */,

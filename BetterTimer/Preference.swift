@@ -8,10 +8,10 @@
 
 import UIKit
 
-class BTPreference: NSObject {
+class Preference: NSObject {
   private let userDefinedTimeIntervalKey = "userDefinedTimeInterval"
 
-  static let getInstance = BTPreference()
+  static let shared = Preference()
 
   private override init() {
     super.init()
@@ -19,7 +19,7 @@ class BTPreference: NSObject {
 
   var userDefinedTimeInterval: TimeInterval {
     get {
-      return UserDefaults().object(forKey: userDefinedTimeIntervalKey) as? TimeInterval ?? 25.0 * 60
+      return UserDefaults().object(forKey: userDefinedTimeIntervalKey) as? TimeInterval ?? 1.0 * 10
     }
     set (newVal) {
       UserDefaults().set(newVal, forKey: userDefinedTimeIntervalKey)
