@@ -25,10 +25,14 @@ final class MainViewModel: ObservableObject {
     private let notificationManager: NotificationManager
     @ObservedObject private var timerManager: TimerManager
 
-    @Published var seconds: Double = 0
+    @Published var degree: Double = 0
+    @Published var seconds: String = "00:00"
+
     func start() {
-        timerManager.start {
-            self.seconds = self.timerManager.count
+        timerManager.start { [weak self] in
+            guard let self = self else { return }
+            self.degree = self.timerManager.count / Preference.shared.userDefinedTimeInterval * 360
+            self.seconds = self.convertTimeInteger(with: self.timerManager.count)
         }
     }
 

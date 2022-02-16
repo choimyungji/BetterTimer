@@ -16,12 +16,13 @@ struct MainView: View {
     @State private var showModal = false //상태
 
     var body: some View {
-        MainArcShape(degree: $viewModel.seconds)
+        MainArcShape(degree: $viewModel.degree)
             .foregroundColor(.red)
             .onAppear {
                 viewModel.start()
             }
-        Text("\(String(viewModel.seconds))")
+            .padding()
+        Text("\(viewModel.seconds)")
         Button(action: {
             self.showModal = true
         }) {
