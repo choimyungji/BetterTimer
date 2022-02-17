@@ -19,7 +19,7 @@ class Preference: NSObject {
 
   var userDefinedTimeInterval: TimeInterval {
     get {
-      return UserDefaults().object(forKey: userDefinedTimeIntervalKey) as? TimeInterval ?? 1.0 * 10
+      return UserDefaults().object(forKey: userDefinedTimeIntervalKey) as? TimeInterval ?? 2.0 * 60
     }
     set (newVal) {
       UserDefaults().set(newVal, forKey: userDefinedTimeIntervalKey)
