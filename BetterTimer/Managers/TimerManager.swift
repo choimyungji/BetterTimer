@@ -10,6 +10,9 @@ import Foundation
 import Combine
 
 class TimerManager: ObservableObject {
+    static let shared = TimerManager()
+    private init() { }
+
     var timer: Timer?
     var userDefinedTime =  Date().addingTimeInterval(Preference.shared.userDefinedTimeInterval)
 
@@ -17,6 +20,7 @@ class TimerManager: ObservableObject {
 
     func start(completion: @escaping () -> Void) {
         let duration: TimeInterval = Preference.shared.userDefinedTimeInterval
+
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] _ in
             guard let self = self else { return }
             guard self.count < duration else {
@@ -26,5 +30,9 @@ class TimerManager: ObservableObject {
             self.count += 1
             completion()
         })
+    }
+
+    func refresh() {
+        count = 0
     }
 }

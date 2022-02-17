@@ -13,7 +13,7 @@ import SwiftUI
 final class MainViewModel: ObservableObject {
 
     init(notificationManager: NotificationManager = NotificationManager(),
-         timerManager: TimerManager = TimerManager()) {
+         timerManager: TimerManager = TimerManager.shared) {
 
         self.notificationManager = notificationManager
         self.timerManager = timerManager
@@ -37,7 +37,7 @@ final class MainViewModel: ObservableObject {
     }
 
     func refresh() {
-        timerManager.userDefinedTime = Date().addingTimeInterval(Preference.shared.userDefinedTimeInterval)
+        timerManager.refresh()
     }
 
     private func convertTimeInteger(with time: TimeInterval) -> String {
