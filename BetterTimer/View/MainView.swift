@@ -23,16 +23,27 @@ struct MainView: View {
             }
             .padding()
         Text("\(viewModel.seconds)")
-        Button(action: {
-            self.showModal = true
-        }, label: {
-            Image(systemName: "gearshape")
-        })
-            .sheet(isPresented: self.$showModal, onDismiss: {
-                viewModel.refresh()
-            }, content: {
-                PreferenceView()
+        HStack {
+            Button(action: {
+                self.showModal = true
+
+            }, label: {
+                Image(systemName: "gearshape")
+                    .foregroundColor(.red)
             })
+                .sheet(isPresented: self.$showModal, onDismiss: {
+                    viewModel.refresh()
+                }, content: {
+                    PreferenceView()
+                })
+
+            Button(action: {
+                viewModel.refresh()
+            }, label: {
+                Image(systemName: "arrow.clockwise")
+                    .foregroundColor(.red)
+            })
+        }
     }
 }
 
