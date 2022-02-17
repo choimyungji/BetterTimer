@@ -13,7 +13,7 @@ import Combine
 
 struct MainView: View {
     @ObservedObject var viewModel: MainViewModel
-    @State private var showModal = false //상태
+    @State private var showModal = false
 
     var body: some View {
         MainArcShape(degree: $viewModel.degree)
@@ -25,12 +25,14 @@ struct MainView: View {
         Text("\(viewModel.seconds)")
         Button(action: {
             self.showModal = true
-        }) {
+        }, label: {
             Image(systemName: "gearshape")
-        }
-        .sheet(isPresented: self.$showModal) {
-                        PreferenceView()
-        }
+        })
+            .sheet(isPresented: self.$showModal, onDismiss: {
+                viewModel.refresh()
+            }, content: {
+                PreferenceView()
+            })
     }
 }
 

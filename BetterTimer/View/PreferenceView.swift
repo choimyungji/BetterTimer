@@ -14,15 +14,22 @@ struct PreferenceView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Button(action: {
-                self.presentationMode.wrappedValue.dismiss()
-            }, label: {
-                Image(systemName: "xmark")
+            HStack {
+                Spacer()
+                Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Image(systemName: "xmark").foregroundColor(.red)
             })
-
+            }
             Text("시간")
                 .font(.title)
-            TextField("시간을 분단위로 입력해 주세요.", text: $minutes)
+            HStack {
+                TextField("시간을 분단위로 입력해 주세요.", text: $minutes)
+                    .textFieldStyle(.roundedBorder)
+                Text("분")
+            }
+            Spacer()
             Button(action: {
                 if let time = Double(minutes) {
                     Preference.shared.userDefinedTimeInterval = time * 60
@@ -31,10 +38,15 @@ struct PreferenceView: View {
             }, label: {
                 Text("완료")
             })
+                .frame(maxWidth: .infinity, minHeight: 48, alignment: .center)
+                .foregroundColor(.white)
+                .background(Color.red)
+
         }.frame(maxWidth: .infinity,
                 maxHeight: .infinity,
                 alignment: .topLeading)
             .padding()
+
     }
 }
 
