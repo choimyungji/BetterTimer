@@ -17,9 +17,6 @@ final class MainViewModel: ObservableObject {
 
         self.notificationManager = notificationManager
         self.timerManager = timerManager
-
-        let date = Date().addingTimeInterval(Preference.shared.userDefinedTimeInterval)
-        notificationManager.registerNotification(date: date)
     }
 
     private let notificationManager: NotificationManager
@@ -34,6 +31,9 @@ final class MainViewModel: ObservableObject {
             self.degree = self.timerManager.count / Preference.shared.userDefinedTimeInterval * 360
             self.seconds = self.convertTimeInteger(with: self.timerManager.count)
         }
+
+        let date = Date().addingTimeInterval(Preference.shared.userDefinedTimeInterval)
+        notificationManager.registerNotification(date: date)
     }
 
     func refresh() {
