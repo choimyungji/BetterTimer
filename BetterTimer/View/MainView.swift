@@ -28,8 +28,8 @@ struct MainView: View {
                 self.showModal = true
 
             }, label: {
-                Image(systemName: "gearshape")
-                    .foregroundColor(.red)
+                Image("settings")
+                    .resizable().frame(width: 34, height: 34)
             })
                 .sheet(isPresented: self.$showModal, onDismiss: {
                     viewModel.refresh()
@@ -40,8 +40,10 @@ struct MainView: View {
             Button(action: {
                 viewModel.refresh()
             }, label: {
-                Image(systemName: "arrow.clockwise")
-                    .foregroundColor(.red)
+                Image("reload")
+                    .resizable().frame(width: 34, height: 34)
+                    
+                    
             })
         }
     }
