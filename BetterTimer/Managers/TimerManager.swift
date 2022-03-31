@@ -27,7 +27,7 @@ class TimerManager: ObservableObject {
                 self.timer?.invalidate()
                 return
             }
-            self.count += 1
+            self.count = duration - Date().distance(to: self.userDefinedTime)
             completion()
         })
     }
