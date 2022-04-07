@@ -23,6 +23,7 @@ struct MainView: View {
             }
             .padding()
         Text("\(viewModel.seconds)")
+        Text("\(viewModel.totalSeconds)")
         HStack {
             Button(action: {
                 self.showModal = true
@@ -42,8 +43,6 @@ struct MainView: View {
             }, label: {
                 Image("reload")
                     .resizable().frame(width: 34, height: 34)
-                    
-                    
             })
         }
     }

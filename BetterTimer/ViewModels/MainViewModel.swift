@@ -24,8 +24,10 @@ final class MainViewModel: ObservableObject {
 
     @Published var degree: Double = 0
     @Published var seconds: String = "00:00"
+    @Published var totalSeconds: String = "00:00"
 
     func start() {
+        totalSeconds = convertTimeInteger(with: Preference.shared.userDefinedTimeInterval)
         timerManager.start { [weak self] in
             guard let self = self else { return }
             self.degree = self.timerManager.count / Preference.shared.userDefinedTimeInterval * 360
