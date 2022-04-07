@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct PreferenceView: View {
-    @State var minutes: String = String(Preference.shared.userDefinedTimeInterval / 60)
+    @State var minutes: String = String(format: "%.0f", Preference.shared.userDefinedTimeInterval / 60)
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     var body: some View {
