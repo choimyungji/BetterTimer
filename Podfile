@@ -6,9 +6,6 @@ target 'BetterTimer' do
   use_frameworks!
   inhibit_all_warnings!
   # Pods for BetterTimer
-  pod 'RxSwift'
-  pod 'RxCocoa'
-  pod 'SnapKit'
   pod 'Then'
   pod 'SwiftLint'
 
