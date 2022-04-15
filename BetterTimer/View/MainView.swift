@@ -54,7 +54,7 @@ struct MainArcShape: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
         path.addArc(center: CGPoint(x: rect.maxX / 2, y: rect.maxY / 2),
-                    radius: (rect.width - (46 * 2)) / 2,
+                    radius: (min(rect.width, rect.height) - (46 * 2)) / 2,
                     startAngle: .degrees(-90),
                     endAngle: .degrees(degree-90),
                     clockwise: false)
