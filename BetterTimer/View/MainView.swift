@@ -16,34 +16,34 @@ struct MainView: View {
     @State private var showModal = false
 
     var body: some View {
-        MainArcShape(degree: $viewModel.degree)
-            .foregroundColor(.red)
-            .onAppear {
-                viewModel.start()
-            }
-            .padding()
-        Text("\(viewModel.seconds)")
-        Text("\(viewModel.totalSeconds)")
-        HStack {
-            Button(action: {
-                self.showModal = true
-
-            }, label: {
-                Image("settings")
-                    .resizable().frame(width: 34, height: 34)
-            })
+        VStack {
+            MainArcShape(degree: $viewModel.degree)
+                .foregroundColor(.red)
+                .onAppear {
+                    viewModel.start()
+                }
+                .padding()
+            Text("\(viewModel.seconds)")
+            Text("\(viewModel.totalSeconds)")
+            HStack {
+                Button(action: {
+                    self.showModal = true
+                }, label: {
+                    Image("settings")
+                        .resizable().frame(width: 34, height: 34)
+                })
                 .sheet(isPresented: self.$showModal, onDismiss: {
                     viewModel.refresh()
                 }, content: {
                     PreferenceView()
                 })
-
-            Button(action: {
-                viewModel.refresh()
-            }, label: {
-                Image("reload")
-                    .resizable().frame(width: 34, height: 34)
-            })
+                Button(action: {
+                    viewModel.refresh()
+                }, label: {
+                    Image("reload")
+                        .resizable().frame(width: 34, height: 34)
+                })
+            }
         }
     }
 }
