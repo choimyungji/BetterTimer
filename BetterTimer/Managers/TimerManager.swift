@@ -23,12 +23,12 @@ class TimerManager: ObservableObject {
 
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] _ in
             guard let self = self else { return }
-            guard self.count < duration else {
-                self.timer?.invalidate()
-                return
-            }
-            self.count = duration - Date().distance(to: self.userDefinedTime)
+            self.count = min(duration - Date().distance(to: self.userDefinedTime), duration)
+
             completion()
+            if self.count >= duration {
+                self.timer?.invalidate()
+            }
         })
     }
 
