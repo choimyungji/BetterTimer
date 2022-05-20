@@ -14,16 +14,22 @@ class TimerManager: ObservableObject {
     private init() { }
 
     var timer: Timer?
-    var userDefinedTime =  Date().addingTimeInterval(Preference.shared.userDefinedTimeInterval)
+    var userDefinedTime: Date?
 
     @Published var count: TimeInterval = 0
 
     func start(completion: @escaping () -> Void) {
-        let duration: TimeInterval = Preference.shared.userDefinedTimeInterval
+        timer?.invalidate()
+        count = 0
+        userDefinedTime = Date().addingTimeInterval(Preference.shared.userDefinedTimeInterval)
 
+        let duration: TimeInterval = Preference.shared.userDefinedTimeInterval
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] _ in
-            guard let self = self else { return }
-            self.count = min(duration - Date().distance(to: self.userDefinedTime), duration)
+            guard let self = self,
+                  let userDefinedTime = self.userDefinedTime
+            else { return }
+
+            self.count = min(duration - Date().distance(to: userDefinedTime), duration)
 
             completion()
             if self.count >= duration {

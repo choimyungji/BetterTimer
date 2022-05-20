@@ -33,7 +33,7 @@ struct MainView: View {
                         .resizable().frame(width: 34, height: 34)
                 })
                 .sheet(isPresented: self.$showModal, onDismiss: {
-                    viewModel.refresh()
+                    viewModel.start()
                 }, content: {
                     PreferenceView()
                 })
