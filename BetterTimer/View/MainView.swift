@@ -19,9 +19,6 @@ struct MainView: View {
         VStack {
             MainArcShape(degree: $viewModel.degree)
                 .foregroundColor(.red)
-                .onAppear {
-                    viewModel.start()
-                }
                 .padding()
             Text("\(viewModel.seconds)")
             Text("\(viewModel.totalSeconds)")
@@ -41,6 +38,12 @@ struct MainView: View {
                     viewModel.refresh()
                 }, label: {
                     Image("reload")
+                        .resizable().frame(width: 34, height: 34)
+                })
+                Button(action: {
+                    viewModel.start()
+                }, label: {
+                    Image("play")
                         .resizable().frame(width: 34, height: 34)
                 })
             }
