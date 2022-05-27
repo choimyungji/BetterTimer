@@ -13,7 +13,6 @@
 		FA00EF962507C24B008F1521 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00EF952507C24B008F1521 /* SceneDelegate.swift */; };
 		FA00EF992507C304008F1521 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00EF982507C304008F1521 /* MainView.swift */; };
 		FA2367A927B8FF98009BAFBD /* PreferenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2367A827B8FF98009BAFBD /* PreferenceView.swift */; };
-		FA498B3122047BBF001391C1 /* BTGlobalTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA498B3022047BBF001391C1 /* BTGlobalTimer.swift */; };
 		FA6245DB222979A10029152E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA6245DA222979A10029152E /* LaunchScreen.storyboard */; };
 		FA6A8B9423168C100090C1BA /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6A8B9323168C100090C1BA /* MainViewModel.swift */; };
 		FA6A8B982316A28A0090C1BA /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6A8B972316A28A0090C1BA /* NotificationManager.swift */; };
@@ -55,7 +54,6 @@
 		FA00EF952507C24B008F1521 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		FA00EF982507C304008F1521 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		FA2367A827B8FF98009BAFBD /* PreferenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceView.swift; sourceTree = "<group>"; };
-		FA498B3022047BBF001391C1 /* BTGlobalTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BTGlobalTimer.swift; sourceTree = "<group>"; };
 		FA6245DA222979A10029152E /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA6A8B9323168C100090C1BA /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		FA6A8B972316A28A0090C1BA /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
@@ -146,7 +144,6 @@
 			children = (
 				FA6A8B972316A28A0090C1BA /* NotificationManager.swift */,
 				FA6A8B992316A2A30090C1BA /* TimerManager.swift */,
-				FA498B3022047BBF001391C1 /* BTGlobalTimer.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -452,7 +449,6 @@
 				FA00EF992507C304008F1521 /* MainView.swift in Sources */,
 				FA2367A927B8FF98009BAFBD /* PreferenceView.swift in Sources */,
 				FA6A8B9423168C100090C1BA /* MainViewModel.swift in Sources */,
-				FA498B3122047BBF001391C1 /* BTGlobalTimer.swift in Sources */,
 				FACD62D42205BEDC00E4681C /* Preference.swift in Sources */,
 				FA00EF962507C24B008F1521 /* SceneDelegate.swift in Sources */,
 				FA6A8B9A2316A2A30090C1BA /* TimerManager.swift in Sources */,
